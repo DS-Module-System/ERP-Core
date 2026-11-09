@@ -1,0 +1,7 @@
+parameters:
+    client_roles:
+        # Clients roles
+        "ROLE_CLIENT_VIEW": "roles.role_client_view"
+        "ROLE_CLIENT_CREATE": "roles.role_client_create"
+        "ROLE_CLIENT_EDIT": "roles.role_client_edit"
+        "ROLE_CLIENT_DELETE": "roles.role_client_delete"

@@ -1,0 +1,56 @@
+{% extends 'login-layout.html.twig' %}
+
+{% block body %}
+    <form class="form" action="{{ checkPathUrl ? checkPathUrl: path(checkPathRoute) }}" method="post" data-enter-submit-id="_submit">
+        <div class="edit-container-box-body">
+            {% if authenticationError %}
+                <div class="alert alert-danger alert-dismissible fade show"
+                     role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <i class="ri-close-circle-line me-1"></i> {{ authenticationError|dtrans(authenticationErrorData, 'SchebTwoFactorBundle') }}
+                </div>
+            {% endif %}
+
+            <p class="text-info"><strong>Enter your two-factor verification code</strong></p>
+
+            <div class="mb-3">
+                <label for="_auth_code">Authentication code: </label>
+                <i style="margin-left: 5px;" class="fa fa-user" aria-hidden="true"></i>
+                <input
+                        id="_auth_code"
+                        class="form-control ds-form-control"
+                        type="text"
+                        name="{{ authCodeParameterName }}"
+                        autocomplete="one-time-code"
+                        autofocus
+                        {#
+                        https://www.twilio.com/blog/html-attributes-two-factor-authentication-autocomplete
+                        If your 2fa methods are using numeric codes only, add these attributes for better user experience:
+                        inputmode="numeric"
+                        pattern="[0-9]*"
+                        #}
+                />
+            </div>
+
+            <div class="mb-3">
+                {% if displayTrustedOption %}
+                    <p class="widget"><label for="_trusted"><input id="_trusted" type="checkbox"
+                                                                   name="{{ trustedParameterName }}"/> {{ "trusted"|trans({}, 'SchebTwoFactorBundle') }}
+                        </label></p>
+                {% endif %}
+                {% if isCsrfProtectionEnabled %}
+                    <input type="hidden" name="{{ csrfParameterName }}" value="{{ csrf_token(csrfTokenId) }}">
+                {% endif %}
+            </div>
+            <div class="form-group ds-form-group text-center">
+                <button type="submit" id="_submit" name="_submit" value="{{ "login"|trans({}, 'SchebTwoFactorBundle') }}" class="btn btn-primary w-100">{{ "login"|trans({}, 'SchebTwoFactorBundle') }}</button>
+            </div>
+            <p class="cancel mt-3 mb-0 text-center"><a href="{{ logoutPath }}">{{ "cancel"|trans({}, 'SchebTwoFactorBundle') }}</a></p>
+        </div>
+        {#
+        If you want to control the URL the user
+        is redirected to on success (more details below)
+        <input type="hidden" name="_target_path" value="/account" />
+        #}
+    </form>
+{% endblock %}

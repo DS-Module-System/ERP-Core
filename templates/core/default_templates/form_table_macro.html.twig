@@ -1,0 +1,139 @@
+{% macro tr(field, attr = {}, is_price_td2 = false) %}
+    {% set is_switch = false %}
+    {% if field.vars.attr['data-switch'] is defined %}
+        {% set is_switch = true %}
+    {% endif %}
+
+    {% if is_switch %}
+        <div class="form-group ds-form-group d-flex align-items-center mb-3">
+            {% set fieldLabel = field.vars.label %}
+            {% if field.vars['translation_domain'] %}
+                {% set fieldLabel = field.vars['translation_domain'] ~ '.' ~ field.vars.label %}
+            {%endif %}
+            <label class="tmp-label-switch me-1">{{ fieldLabel|dtrans }}</label>
+            {% set attrClass = 'form-control ds-form-control' %}
+            {% if(field.vars.attr.class is defined) %}
+                {% set attrClass = attrClass~' ' ~ field.vars.attr.class %}
+            {% endif %}
+            {{ form_widget(field, attr|merge({"attr":{'class':attrClass}})) }}
+            <label for="{{ field.vars.id }}" data-on-label="{{ field.vars.label_attr['data-on-label']|dtrans }}"
+                   data-off-label="{{ field.vars.label_attr['data-off-label']|dtrans }}"></label>
+            <div class="invalid-feedback">{{ form_errors(field) }}</div>
+        </div>
+    {% else %}
+        <div class="form-group ds-form-group mb-3">
+            {{ form_label(field, attr) }}
+            {% set hasError = (form_errors(field)) ? ' is-invalid': '' %}
+            {%  if field.vars.block_prefixes[1] == 'choice' and (field.vars.expanded is defined and field.vars.expanded == false) %}
+                {% set attrClass = 'form-select' %}
+            {% else %}
+                {% set attrClass = 'form-control ds-form-control' %}
+            {% endif %}
+            {% set attrClass = attrClass~hasError %}
+            {% if(field.vars.attr.class is defined) %}
+                {% set attrClass = attrClass~' ' ~ field.vars.attr.class %}
+            {% endif %}
+            {{ form_widget(field, attr|merge({"attr":{'class':attrClass}})) }}
+            <div class="invalid-feedback">{{ form_errors(field) }}</div>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro tr_lngs(field, lngs, is_switch = false, attr = {}) %}
+    {% for lngForm in lngs %}
+        {% if lngForm.vars.value.lng in full_languages|keys %}
+            {% set fieldObj = attribute(lngForm, field) %}
+            {% if is_switch %}
+                <div class="form-group ds-form-group d-flex align-items-center mb-3 lng {{ lngForm.vars.value.lng }}">
+                    <label class="tmp-label-switch me-1">{{ fieldObj.vars.label|dtrans }}</label>
+                    {{ form_widget(fieldObj) }}
+                    <label for="{{ fieldObj.vars.id }}" data-on-label="{{ fieldObj.vars.label_attr['data-on-label']|dtrans }}"
+                           data-off-label="{{ fieldObj.vars.label_attr['data-off-label']|dtrans }}"></label>
+                    <div class="invalid-feedback">{{ form_errors(fieldObj) }}</div>
+                </div>
+            {% else %}
+                <div class="form-group ds-form-group mb-3 {{ lngForm.vars.value.lng }} lng">
+                    {{ form_label(fieldObj, attr) }}
+                    {% set hasError = (form_errors(fieldObj)) ? ' is-invalid': '' %}
+                    {% set attrClass = 'form-control ds-form-control'~hasError %}
+                    {% if fieldObj.vars.attr is defined and (fieldObj.vars.attr.class is defined) %}
+                        {% set attrClass = attrClass~' ' ~ fieldObj.vars.attr.class %}
+                    {% endif %}
+                    {{ form_widget(fieldObj, attr|merge({"attr":{'class':attrClass}})) }}
+                    <div class="invalid-feedback">{{ form_errors(fieldObj) }}</div>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro tr_multiple_checkboxes(field, label) %}
+    <tr>
+        <td>{{ form_label(field, label) }}</td>
+        <td>
+            {% for check in field %}
+                <div class="cstm-checkbox-container">{{ form_widget(check) }}{{ form_label(check) }}</div>
+            {% endfor %}
+            <div class="form-error">{{ form_errors(field) }}</div>
+        </td>
+    </tr>
+{% endmacro %}
+
+{% macro btns(back_path_route, form, is_visible_delete_btn = false, params = {}, is_return_to_module_list = false) %}
+    <div class="row border-top border-bottom mt-2 pt-2 pb-2">
+        <div class="col-6"><a href="{{ path(back_path_route, params) }}" class="btn btn-light ds-cms-back-btn" {{ is_return_to_module_list == true ? 'data-return-to-module-list=""' : '' }}>
+                <i class="mdi mdi-arrow-left-bold me-1"></i>{{ 'core.module.backBtnTitle'|dtrans }}</a>
+        </div>
+        <div class="col-6 text-end">
+            {% if is_visible_delete_btn %}
+                <button type="button" class="btn btn-danger me-md-2 mb-3 mb-md-0" data-bs-toggle="modal" data-bs-target="#danger-header-modal"><i class="mdi mdi-delete me-1"></i>{{ 'core.module.deleteBtnTitle'|dtrans }}</button>
+            {% endif %}
+            {{ form_widget(form.save) }}
+
+            {% if is_visible_delete_btn %}
+                <div id="danger-header-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header modal-colored-header bg-danger">
+                                <h5 class="modal-title" id="danger-header-modalLabel">{{ 'core.layout.deleteConfirmModalTitle'|dtrans }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                            </div>
+                            <div class="modal-body text-start">
+                                {{ 'core.layout.deleteConfirmModalBody'|dtrans }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">{{ 'core.layout.cancelBtnTitle'|dtrans }}</button>
+                                {{ form_widget(form.delete) }}
+                                {#                                <button type="button" class="btn btn-danger">Изтрий</button>#}
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro btns_for_modal(form, is_visible_delete_btn = false) %}
+    <div class="row border-top border-bottom mt-2 pt-2 pb-2">
+        <div class="col-12 text-end">
+            {% if is_visible_delete_btn %}
+                {{ form_widget(form.delete) }}
+            {% endif %}
+            {{ form_widget(form.save) }}
+
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro generateFormRows(form, exludedFileds = []) %}
+{#    {% import _self as form %}#}
+    {% for key, child in form.children %}
+        {% if key not in ['save', 'delete', '_token'] and key not in exludedFileds %}
+            {% if child.vars['attr']['data-original-files-hidden'] is not defined %}
+                {{ _self.tr(child) }}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+{% endmacro %}

@@ -1,0 +1,18 @@
+# Delivery controller translations
+leftMenu.deliveries: 'Deliveries'
+
+createDeliveryTitle: 'Create Delivery'
+editDeliveryTitle: 'Edit Delivery'
+
+deliveryDate: 'Delivery Date'
+createdBy: 'Created By'
+createdAt: 'Created At'
+supplier: 'Supplier'
+warehouse: 'Warehouse'
+finalPrice: 'Final Price' 
+cardTitle: 'Delivery Details'
+allWarehouses: 'All Warehouses'
+allDeliveries: 'All Deliveries'
+allProducts: 'All Products'
+chooseWarehouse: 'Choose Warehouse'
+chooseSupplier: 'Choose Supplier'

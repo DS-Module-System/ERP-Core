@@ -1,0 +1,5 @@
+symfonycasts_sass:
+  # Path to your Sass root file
+  root_sass:
+    # Default:
+    - '%kernel.project_dir%/assets/scss/app.scss'

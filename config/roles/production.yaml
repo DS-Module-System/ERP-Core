@@ -1,0 +1,26 @@
+parameters:
+    production_roles:
+        # production roles
+        "ROLE_PRODUCTION_VIEW": "roles.role_production_view"
+        "ROLE_PRODUCTION_CREATE": "roles.role_production_create"
+        "ROLE_PRODUCTION_EDIT": "roles.role_production_edit"
+        "ROLE_PRODUCTION_DELETE": "roles.role_production_delete"
+
+        # production material roles
+        "ROLE_PRODUCTION_MATERIAL_VIEW": "roles.role_production_material_view"
+        "ROLE_PRODUCTION_MATERIAL_CREATE": "roles.role_production_material_create"
+        "ROLE_PRODUCTION_MATERIAL_EDIT": "roles.role_production_material_edit"
+        "ROLE_PRODUCTION_MATERIAL_DELETE": "roles.role_production_material_delete"
+
+
+# production:
+#     production_list: [ROLE_USER]
+#     production_create: [ROLE_USER]
+#     production_edit: [ROLE_USER]
+#     production_deletes: [ROLE_USER]
+    
+#     production_material_list: [ROLE_USER]
+#     production_material_create: [ROLE_USER]
+#     production_material_edit: [ROLE_USER]
+#     production_material_deletes: [ROLE_USER] 
+

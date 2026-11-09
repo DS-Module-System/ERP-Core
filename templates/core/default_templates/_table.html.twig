@@ -1,0 +1,130 @@
+{% import 'core/default_templates/data_table_macro.html.twig' as data_table %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-sm-4">
+                        {% block buttons %}
+                            {% if config.newLink is defined %}
+                                {{ config.newLink }}
+                            {% endif %}
+                            {% if config.deleteBtn is defined %}
+                                {{ data_table.delete_btn() }}
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+                    <div class="col-sm-4 text-center">
+                        {% block table_records_info %}
+                            {% if instanceOf(rows, 'Knp\\Bundle\\PaginatorBundle\\Pagination\\SlidingPagination') %}
+                                <label>{{ 'core.module.recordTitle'|dtrans }}: {{ rows.getTotalItemCount() }}</label>
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+                    <div class="col-sm-4 text-end">
+                        {% block item_per_page %}
+                            {% if instanceOf(rows, 'Knp\\Bundle\\PaginatorBundle\\Pagination\\SlidingPagination') %}
+                                {{ data_table.item_per_page(rows.route, rows.query) }}
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+                </div>
+
+                <div class="table-responsive d-md-block">
+                    <table class="table ds-table-sm w-100 dt-responsive nowrap table-bordered" data-table-sticky="">
+                        <thead class="thead-light">
+                        <tr>
+                            {% block ths %}
+                                {% if config.deleteBtn is defined %}
+                                    <th class="all" style="width: 20px;">{{ data_table.checkbox() }}</th>
+                                {% endif %}
+                                {% for key, col in config.cols %}
+                                    {% if key == 'tableAction' %}
+                                        <th style="width: 85px;">{{ col.label|dtrans }}</th>
+                                    {% else %}
+                                        {{ data_table.th(col.label, col.lng is defined ? true : false, col.sortColumn is defined ? col.sortColumn : '') }}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endblock %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% block trs %}
+                            {% set lngArr = {} %}
+                            {% for row in rows %}
+                                <tr>
+                                    {% if config.deleteBtn is defined %}
+                                        <td>{{ data_table.checkbox(row.id) }}</td>
+                                    {% endif %}
+                                    {% for key, col in config.cols %}
+                                        {% if key == 'tableAction' %}
+                                            <td class="table-action">
+                                                {% if col.edit is defined %}
+                                                    {% if col.editKey is defined %}
+                                                        {% set rowId = (attribute(row, col.editKey)).id %}
+                                                    {% else %}
+                                                        {% set rowId = row.id %}
+                                                    {% endif %}
+                                                    <a href="{{ col.edit|replace({"-1": rowId}) }}" title="{{ 'core.module.editBtnTitle'|dtrans }}"
+                                                       class="btn btn-sm btn-primary mb-2" style="white-space: nowrap;">
+                                                        <i class="mdi mdi-square-edit-outline"></i>
+                                                        {{ 'core.module.editBtnTitle'|dtrans }}
+                                                    </a>
+                                                {% endif %}
+
+                                                {% if col.view is defined %}
+                                                    <a href="{{ col.view|replace({"-1": row.id}) }}" title="{{ 'core.module.editBtnTitle'|dtrans }}"
+                                                       class="btn btn-sm btn-primary mb-2" style="white-space: nowrap;">
+                                                        <i class="mdi mdi-eye-outline"></i>
+                                                        {{ 'core.module.viewBtnTitle'|dtrans }}
+                                                    </a>
+                                                {% endif %}
+
+                                                {% if col.delete is defined %}
+                                                    <a href="{{ col.delete|replace({"-1": row.id}) }}" title="{{ 'core.module.deleteBtnTitle'|dtrans }}"
+                                                       class="action-icon"> <i class="mdi mdi-delete"></i>
+                                                    </a>
+                                                {% endif %}
+                                            </td>
+                                        {% else %}
+                                            {% if col.lng is defined %}
+                                                {% for lng in lngs %}
+                                                    {% for row_lng in row.lngs %}
+                                                        {% if row_lng.lng == lng %}
+                                                            {% set class = col.class is defined ? col.class : '' %}
+                                                            <td class="lng-column {{ lng }} {{ class }}">{{ attribute(row_lng, key) }}</td>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            {% else %}
+                                                {% if col.type is defined %}
+                                                    {% if(col.type == 'array' and col.array is defined) %}
+                                                        <td>{{ data_table.get_nested_object(row, key, col.type, col.array, col.trans is defined ? true : false) }}</td>
+                                                    {% elseif col.type == 'custom' %}
+                                                        <td>{{ block( key ) }}</td>
+                                                    {% else %}
+                                                        <td>{{ data_table.get_nested_object(row, key, col.type, {}, col.trans is defined ? true : false) }}</td>
+                                                    {% endif %}
+                                                {% else %}
+                                                    <td>{{ data_table.get_nested_object(row, key, null, {}, col.trans is defined ? true : false) }}</td>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        {% endblock %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {% block pagination %}
+                    {% if instanceOf(rows, 'Knp\\Bundle\\PaginatorBundle\\Pagination\\SlidingPagination') %}
+                        {{ knp_pagination_render(rows) }}
+                    {% endif %}
+                {% endblock %}
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col -->
+</div>

@@ -1,0 +1,24 @@
+{%- block button_widget -%}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+            }) %}
+        {%- elseif label is same as(false) -%}
+            {% set translation_domain = false %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
+        {% if icon_before is defined and icon_before is not empty %}
+            <i class="{{ icon_before }}"></i>
+        {% endif %}
+        {{ translation_domain is same as(false) ? label : label|dtrans({}, translation_domain) }}
+        {% if icon_after is defined and icon_after is not empty %}
+            <i class="{{ icon_after }}"></i>
+        {% endif %}
+    </button>
+{%- endblock button_widget -%}

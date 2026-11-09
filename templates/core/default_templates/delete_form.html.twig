@@ -1,0 +1,6 @@
+<form method="post" action="{{ path(path_name) }}">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token(path_name) }}">
+    <input type="hidden" name="ids" value="asd">
+    <button class="do-delete list-container-btn" onclick="multipleDeleteInDataTable">{{ 'core.module.deleteBtnTitle'|dtrans }}</button>
+</form>

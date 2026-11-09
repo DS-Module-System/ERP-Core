@@ -1,0 +1,7 @@
+parameters:
+    order_roles:
+        # Clients roles
+        "ROLE_ORDER_VIEW": "roles.role_order_view"
+        "ROLE_ORDER_CREATE": "roles.role_order_create"
+        "ROLE_ORDER_EDIT": "roles.role_order_edit"
+        "ROLE_ORDER_DELETE": "roles.role_order_delete"

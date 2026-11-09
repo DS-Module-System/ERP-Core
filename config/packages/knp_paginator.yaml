@@ -1,0 +1,3 @@
+knp_paginator:
+    template:
+         pagination: core/default_templates/bootstrap_v4.html.twig

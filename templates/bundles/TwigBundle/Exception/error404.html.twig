@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Error 404 | DS Module System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="DS Module System" name="description" />
+    <meta content="DS Module System" name="author" />
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#4285f4">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#4285f4">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#4285f4">
+    <link rel="apple-touch-icon" sizes="57x57" href="/res_admin/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/res_admin/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/res_admin/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/res_admin/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/res_admin/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/res_admin/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/res_admin/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/res_admin/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/res_admin/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/res_admin/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/res_admin/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/res_admin/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/res_admin/favicons/favicon-16x16.png">
+    <meta name="msapplication-TileImage" content="/res_admin/favicons/ms-icon-144x144.png">
+    <link rel="manifest" href="/res_admin/manifest.json">
+    <meta name="msapplication-TileColor" content="#28208c">
+    <meta name="msapplication-TileImage" content="/res_admin/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#28208c">
+
+    {% block stylesheet_before %}{% endblock %}
+    {% block stylesheet %}{% endblock %}
+    {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% block stylesheet_after %}{% endblock %}
+
+    {% block javascript_top %}{% endblock %}
+
+    <style>
+        .text-error {
+            color: #27258d;
+            text-shadow: rgb(39 37 141 / 30%) 5px 1px, rgb(39 37 141 / 20%) 10px 3px;
+        }
+        .btn-info {
+            -webkit-box-shadow: 0 2px 6px 0 rgb(39 37 141 / 50%);
+            box-shadow: 0 2px 6px 0 rgb(39 37 141 / 50%);
+            background-color: #27258d;
+            border-color: #27258d;
+        }
+        .btn-info:hover {
+            background-color: #2677a4;
+            border-color: #2677a4;
+        }
+        .btn-info:focus, .btn-info.focus {
+            background-color: #2677a4;
+            border-color: #2677a4;
+            box-shadow: 0 0 0 0.2rem rgb(87 187 216 / 50%);
+        }
+    </style>
+</head>
+
+<body class="qauthentication-bg">
+
+<div class="account-pages pt-2 pb-2">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card">
+                    <!-- Logo -->
+                    <div class="card-header pt-4 pb-4 text-center">
+                        <a href="https://www.dsmodulesystem.com/">
+                            <span><img style="max-width: 320px; width: 100%;" src="{{ asset('images/ds-module-system-logo-simple.png') }}" alt=""></span>
+                        </a>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h1 class="text-error">4<i class="mdi mdi-emoticon-sad"></i>4</h1>
+                            <h4 class="text-uppercase text-danger mt-3">Page Not Found</h4>
+                            <p class="mt-3">It's looking like you may have taken a wrong turn. Don't worry... it
+                                happens to the best of us. Here's a
+                                little tip that might help you get back on track.</p>
+
+                            <a class="btn btn-info mt-3" href="{{ ('' in app.request.requestUri) ? path('dashboard') : '/' }}"><i class="mdi mdi-reply"></i> Return Home</a>
+                        </div>
+                    </div> <!-- end card-body-->
+                </div>
+                <!-- end card -->
+            </div> <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+<!-- end page -->
+
+<footer class="footer footer-alt">
+    2017 - {{ 'now'|date('Y' )}} &copy; DS Module System - <a href="https://www.dsmodulesystem.com/" target="_blank">www.dsmodulesystem.com</a>
+</footer>
+
+
+</body>
+</html>

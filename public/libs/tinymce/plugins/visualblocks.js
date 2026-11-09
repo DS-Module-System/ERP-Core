@@ -1,0 +1,7 @@
+/**
+ * Bundled by jsDelivr using Rollup v2.79.1 and Terser v5.19.2.
+ * Original file: /npm/tinymce@6.8.3/plugins/visualblocks/index.js
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+var t={};!function(){var t=tinymce.util.Tools.resolve("tinymce.PluginManager");const o=(t,o,e)=>{t.dom.toggleClass(t.getBody(),"mce-visualblocks"),e.set(!e.get()),((t,o)=>{t.dispatch("VisualBlocks",{state:o})})(t,e.get())},e=(s="visualblocks_default_state",t=>t.options.get(s));var s;const l=(t,o)=>e=>{e.setActive(o.get());const s=t=>e.setActive(t.state);return t.on("VisualBlocks",s),()=>t.off("VisualBlocks",s)};t.add("visualblocks",((t,s)=>{(t=>{(0,t.options.register)("visualblocks_default_state",{processor:"boolean",default:!1})})(t);const a=(t=>{let o=t;return{get:()=>o,set:t=>{o=t}}})(!1);((t,e,s)=>{t.addCommand("mceVisualBlocks",(()=>{o(t,0,s)}))})(t,0,a),((t,o)=>{const e=()=>t.execCommand("mceVisualBlocks");t.ui.registry.addToggleButton("visualblocks",{icon:"visualblocks",tooltip:"Show blocks",onAction:e,onSetup:l(t,o)}),t.ui.registry.addToggleMenuItem("visualblocks",{text:"Show blocks",icon:"visualblocks",onAction:e,onSetup:l(t,o)})})(t,a),((t,s,l)=>{t.on("PreviewFormats AfterPreviewFormats",(o=>{l.get()&&t.dom.toggleClass(t.getBody(),"mce-visualblocks","afterpreviewformats"===o.type)})),t.on("init",(()=>{e(t)&&o(t,0,l)}))})(t,0,a)}))}();export{t as default};

@@ -1,0 +1,11 @@
+parameters:
+    warehouse_roles:
+        # Warehouse management roles
+        "ROLE_WAREHOUSE_VIEW": "roles.role_warehouse_view"
+        "ROLE_WAREHOUSE_CREATE": "roles.role_warehouse_create"
+        "ROLE_WAREHOUSE_EDIT": "roles.role_warehouse_edit"
+        "ROLE_WAREHOUSE_DELETE": "roles.role_warehouse_delete"
+        "ROLE_WAREHOUSE_STOCK_VIEW": "roles.role_warehouse_stock_view"
+        "ROLE_WAREHOUSE_STOCK_CREATE": "roles.role_warehouse_stock_create"
+        "ROLE_WAREHOUSE_STOCK_EDIT": "roles.role_warehouse_stock_edit"
+        "ROLE_WAREHOUSE_STOCK_DELETE": "roles.role_warehouse_stock_delete" 

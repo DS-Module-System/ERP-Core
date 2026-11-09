@@ -1,0 +1,17 @@
+parameters:
+    user_roles:
+        # User management roles
+        "ROLE_USER_VIEW": "roles.role_user_view"
+        "ROLE_USER_CREATE": "roles.role_user_create"
+        "ROLE_USER_EDIT": "roles.role_user_edit"
+        "ROLE_USER_DELETE": "roles.role_user_delete"
+        "ROLE_USER_APPROVE": "roles.role_user_approve"
+        "ROLE_USER_RESET_PASSWORD": "roles.role_user_reset_password"
+        
+        # User group management roles
+        "ROLE_USER_GROUP_VIEW": "roles.role_user_group_view"
+        "ROLE_USER_GROUP_CREATE": "roles.role_user_group_create"
+        "ROLE_USER_GROUP_EDIT": "roles.role_user_group_edit"
+        "ROLE_USER_GROUP_DELETE": "roles.role_user_group_delete"
+        "ROLE_USER_GROUP_ASSIGN_ROLES": "roles.role_user_group_assign_roles"
+        "ROLE_USER_GROUP_MANAGE_MEMBERS": "roles.role_user_group_manage_members"

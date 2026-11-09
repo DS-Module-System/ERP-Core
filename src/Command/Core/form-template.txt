@@ -1,0 +1,36 @@
+{% extends is_modal_request() ? modal-form-base.html.twig' : base.html.twig' %}
+
+{% import 'default_templates/form_table_macro.html.twig' as form_table %}
+
+{% set is_edit = is_edit_route(app.request.get('_route')) %}
+
+{% set form_btns = form_table.btns('{#TEMPLATE_FORDER_NAME#}_list', form, is_edit) %}
+
+{% set fields = form_table.generateFormRows(form) %}
+
+{% set headerTitle = '' %}
+{% if is_edit == false %}
+    {% set headerTitle = '{#MODULE_NAME#}.create{#ENTITY_NAME#}Title'|trans %}
+{% else %}
+    {% set headerTitle = '{#MODULE_NAME#}.edit{#ENTITY_NAME#}Title'|trans %}
+{% endif %}
+
+{% set formOptions = {
+    'template': is_modal_request() ? default_templates/_form_modal.html.twig' : default_templates/_form.html.twig',
+} %}
+
+{% block body %}
+    {% embed formOptions.template with formOptions %}
+        {% block head_title %}
+            {{ headerTitle }}
+        {% endblock %}
+
+        {% block form_fields %}
+            {{ fields }}
+        {% endblock %}
+
+        {% block form_btns %}
+            {{ form_btns }}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

@@ -1,0 +1,8 @@
+framework:
+    mailer:
+        dsn: 'sendmail://default'
+
+when@dev:
+    framework:
+        mailer:
+            dsn: '%env(MAILER_DSN)%'

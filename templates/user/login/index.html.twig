@@ -1,0 +1,54 @@
+{% extends 'login-layout.html.twig' %}
+
+{% block body %}
+    <div class="edit-container">
+        <h3>{{ site_name ~ ' - ' ~ "Login"|dtrans() }}</h3>
+        <p>{{ 'Please sign in'|dtrans }}</p>
+        <form action="{{ path('app_login') }}" method="post" data-enter-submit-id="_submit">
+            <div class="edit-container-box-body">
+                {% if error %}
+                    <div class="alert alert-danger alert-dismissible fade show"
+                         role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <i class="ri-close-circle-line me-1"></i> {{ error.messageKey|dtrans({'%minutes%': 1}, 'security') }}
+                    </div>
+                {% endif %}
+
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+                <input type="hidden" name="_target_path" value="{{ path('login_success') }}"/>
+
+                <div class="mb-3">
+                    <label for="email">{{ 'user.email'|dtrans }}</label>
+                    <input type="email" value="{{ last_username }}" name="_username" id="email" class="form-control ds-form-control" autocomplete="email" required autofocus>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password">{{ 'user.password'|dtrans }}</label>
+                    <div class="input-group ds-input-group input-group-merge">
+                        <input type="password" name="_password" id="password" class="form-control ds-form-control" autocomplete="current-password" required>
+                        <div class="input-group-text" data-password="false">
+                            <span class="password-eye"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input type="checkbox" name="_remember_me" id="remember_me">
+                    <label for="remember_me">{{ 'user.rememberMe'|dtrans }}</label>
+                </div>
+                <div class="form-group ds-form-group text-center">
+                    <button type="submit" class="btn btn-primary w-100">{{ 'user.loginBtnTitle'|dtrans }}</button>
+                </div>
+            </div>
+            <p class="text-center mb-0 mt-3"><a class="text-muted" href="{{ path('forgot_password_request') }}"><strong>Забравена парола</strong></a></p>
+            {#
+            If you want to control the URL the user
+            is redirected to on success (more details below)
+            <input type="hidden" name="_target_path" value="/account" />
+            #}
+        </form>
+    </div>
+{% endblock %}
+
+

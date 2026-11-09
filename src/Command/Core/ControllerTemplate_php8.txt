@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\{#ENTITY_NAME#};
+use App\Form\{#FORM_NAME#};
+use App\Form\{#SEARCH_FORM_NAME#};
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+
+#[Route(path: '/{#MAIN_ROUTE#}')]
+class {#CONTROLLER_NAME#} extends CoreBaseController
+{
+    protected string $entityClass = {#ENTITY_NAME#}::class;
+    protected string $formClass = {#FORM_NAME#}::class;
+    protected string $searchFormClass = {#SEARCH_FORM_NAME#}::class;
+    protected string $moduleTemplateName = '{#TEMPLATE_FORDER_NAME#}';
+
+    #[Route(path: '', name: '{#TEMPLATE_FORDER_NAME#}_list')]
+    public function list(Request $request): Response
+    {
+        $page = $request->get('page', 1);
+        return $this->list($request, $page);
+    }
+
+    #[Route(path: '/create', name: '{#TEMPLATE_FORDER_NAME#}_create')]
+    public function create(Request $request): Response
+    {
+        return $this->create($request);
+    }
+
+    #[Route(path: '/{id}/edit', name: '{#TEMPLATE_FORDER_NAME#}_edit')]
+    public function edit($id, Request $request): Response
+    {
+        return $this->edit($request, $id);
+    }
+
+    #[Route(path: '/deletes', name: '{#TEMPLATE_FORDER_NAME#}_deletes')]
+    public function deletes(Request $request): Response
+    {
+        return $this->deletes($request);
+    }
+
+}

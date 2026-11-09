@@ -1,0 +1,296 @@
+{% set knp_current_item = knp_menu_get_current_item('main') %}
+
+{% if pageTitle is not defined %}
+    {% set pageTitle = '' %}
+    {% if knp_current_item %}
+        {% set pageTitle = knp_current_item.name|dtrans %}
+    {% endif %}
+{% endif %}
+
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="{{ app.user is not null and app.user.isDarkTheme ? 'dark' : 'light' }}" data-layout-mode="fluid" data-topbar-color="light" data-sidenav-size="default" data-sidenav-color="light" data-layout-position="fixed" class="menuitem-active">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>{% block title %}{{ pageTitle }} {{ ' - ' ~ site_name }}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="DevScale" name="author">
+
+    <meta name="robots" content="noindex,nofollow"/>
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#4285f4">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#4285f4">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#4285f4">
+    <link rel="apple-touch-icon" sizes="57x57" href="/res_admin/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/res_admin/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/res_admin/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/res_admin/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/res_admin/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/res_admin/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/res_admin/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/res_admin/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/res_admin/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/res_admin/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/res_admin/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/res_admin/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/res_admin/favicons/favicon-16x16.png">
+    <meta name="msapplication-TileImage" content="/res_admin/favicons/ms-icon-144x144.png">
+    <link rel="manifest" href="/res_admin/manifest.json">
+    <meta name="msapplication-TileColor" content="#28208c">
+    <meta name="msapplication-TileImage" content="/res_admin/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#28208c">
+
+    <script>
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', function() {
+				navigator.serviceWorker.register('/admin-service-worker.js');
+			});
+		}
+
+		var isDarkMode = {{ (app.user is not null and app.user.isDarkTheme is null) ? 'null' : app.user is not null and app.user.isDarkTheme ? 'true' : 'false' }};
+		if(isDarkMode === null) {
+			if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark')
+			}
+		}
+		window.FILE_UPLOAD_BASE_URL = "{{ path('file_create')|replace({'/create': ''}) }}";
+    </script>
+
+    {% block stylesheet_before %}{% endblock %}
+    {% block stylesheet %}
+        <link rel="stylesheet" href="{{ asset('scss/app.scss') }}">
+    {% endblock %}
+
+    {% block javascript_top %}{% endblock %}
+
+    {% block importmap %}{{ importmap('app') }}{% endblock %}
+
+    {% block stylesheet_after %}{% endblock %}
+
+    {% block javascript %}{% endblock %}
+
+</head>
+
+<body class="">
+<!-- Begin page -->
+<div class="wrapper">
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left-side-menu">
+
+        <!-- LOGO -->
+        <a href="https://www.dsmodulesystem.com/" target="_blank" class="logo text-center logo-light">
+                    <span class="logo-lg">
+                        <img src="{{ asset('images/ds-module-system-logo-simple.png') }}"
+                             alt="" style="height: auto; width: auto; max-height: 80px;vertical-align: top;padding-top: 10px; padding-bottom: 10px;">
+                    </span>
+            <span class="logo-sm">
+                        <img src="{{ asset('images/ds-module-system-logo-simple.png') }}"
+                             alt="" style="height: auto; width: auto; max-height: 80px;vertical-align: top;padding-top: 10px; padding-bottom: 10px;">
+                    </span>
+        </a>
+
+        <!-- LOGO -->
+        <a href="https://www.dsmodulesystem.com/" target="_blank" class="logo text-center logo-dark">
+                    <span class="logo-lg">
+                        <img src="{{ asset('images/ds-module-system-logo-simple.png') }}"
+                             alt="" style="height: auto; width: auto; max-height: 80px;vertical-align: top;padding-top: 10px; padding-bottom: 10px;">
+                    </span>
+            <span class="logo-sm">
+                        <img src="{{ asset('images/ds-module-system-logo-simple.png') }}"
+                             alt="" style="height: auto; width: auto; max-height: 80px;vertical-align: top;padding-top: 10px; padding-bottom: 10px;">
+                    </span>
+        </a>
+
+        {% if app.user is not null %}
+            <div class="h-100 be-nav be-nav-content" id="left-side-menu-container" data-simplebar>
+                <div class="be-nav-title">{{ 'core.layout.navigationTitle'|dtrans }}</div>
+                {{ knp_menu_render('main') }}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+    <div class="content-page">
+        <div class="content">
+            <!-- Topbar Start -->
+            <div class="navbar-custom">
+                <div class="topbar container-fluid">
+                    <div class="d-flex align-items-center gap-lg-2 gap-1">
+
+                        <button class="button-toggle-menu button-menu-mobile disable-btn" style="margin-left: -10px;">
+                            <i class="mdi mdi-menu"></i>
+                        </button>
+
+                        <!-- Topbar Search Form -->
+                        <div class="app-search dropdown d-lg-block">
+                            <div class="header-hours">
+                                <span>{{ ("core.layout."~"now"|date("l"))|dtrans }}
+                                    <strong>{{ "now"|date("d") }} {{ ("core.layout."~"now"|date("M"))|dtrans }} {{ "now"|date("Y") }}</strong> 
+                                        <span id="clock">{{ "now"|date("H:i") }}</span>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="topbar-menu d-flex align-items-center gap-3 ps-1">
+                        <li>
+
+                            {# change language will keep the current path now #}
+                            {% set route = app.request.attributes.get('_route') %}
+                            {% set params = app.request.attributes.get('_route_params')|merge({'_locale': app.request.locale == 'bg' ? 'en' : 'bg'}) %}
+
+                            <a href="{{ path(route, params) }}" class="btn btn-primary">
+                                <img src="{{ asset('images/' ~ (app.request.locale == 'bg' ? 'en' : 'bg') ~ '-flag.png') }}" 
+                                    alt="language switch" class="me-1" height="12">
+                            </a>
+
+                        </li>
+
+                        {% if app.user is not null %}
+                            <li class="dropdown">
+                                <a class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                    <span class="account-user-avatar">
+                                        <span class="avatar avatar-32 img-circle bg-primary">{{ app.user.userIdentifier|first }}</span>
+                                    </span>
+                                    <span class="d-lg-flex flex-column gap-1 d-none">
+                                        <h5 class="my-0">{{ app.user.userIdentifier }}</h5>
+                                        <h6 class="my-0 fw-normal">{{ 'core.layout.userTitle'|dtrans }}</h6>
+                                    </span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
+                                    <!-- item-->
+                                    <div class=" dropdown-header noti-title">
+                                        <h6 class="text-overflow m-0">{{ 'core.layout.welcome'|dtrans }} !</h6>
+                                    </div>
+
+                                    <!-- item-->
+                                    <a href="{{ path('user_me') }}" class="dropdown-item">
+                                        <i class="mdi mdi-account-circle me-1"></i>
+                                        <span>{{ 'core.layout.myAcountTitle'|dtrans }}</span>
+                                    </a>
+
+                                    <div class="dropdown-item notify-item">
+                                        <div class="change-theme-color">
+                                            <div class="change-theme-color-label">Тема:</div>
+                                            <div>
+                                                <form method="post" action="{{ path('user_change_user_theme_mode', {'backUrl': app.request.uri}) }}">
+                                                    <!-- Primary Switch-->
+                                                    <input name="isLightMode" type="checkbox" id="switch2" {{ app.user is not null and app.user.isDarkTheme ? '' : 'checked' }} value="1" data-switch="primary" onclick="this.form.submit();"/>
+                                                    <label for="switch2" data-on-label="Light" data-off-label="Dark"></label>
+                                                    <input type="hidden" name="submit1" value="submit1" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <form action="{{ path('app_logout') }}" method="get" id="formLogout">
+                                        <div class="dropdown-item notify-item" role="button" onclick="document.getElementById('formLogout').submit();">
+                                            <i class="mdi mdi-logout me-1"></i><span>{{ 'core.layout.logoutTitle'|dtrans }}</span>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+{#                <div id="newFeatureCloseBlock" class="alert alert-info alert-dismissible fade show mt-4" role="alert">#}
+{#                    <button id="newFeatureCloseBtn" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>#}
+{#                    {% set newFeatureRequestLng = '' %}#}
+{#                    {% if app.request.locale == 'bg' %}#}
+{#                        {% set newFeatureRequestLng = '/bg' %}#}
+{#                    {% endif %}#}
+{#                    {{ 'core.layout.newFeatureRequesMsg'|dtrans}} <a href="https://devscale.bg{{ newFeatureRequestLng }}/new-feature-requests" target="_blank" class="btn btn-info  ms-2">{{ 'core.layout.contactBtnTitle'|dtrans }}</a>#}
+{#                </div>#}
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    {% block breadcrumb %}
+                                        {% for breadcrumb_item in knp_menu_get_breadcrumbs_array(knp_current_item) %}
+                                            {% if breadcrumb_item.label != "root" %}
+                                                {% if not loop.last %}
+                                                    {#<li class="breadcrumb-item"><a href="{{ breadcrumb_item.uri }}">{{ breadcrumb_item.label }}</a></li>#}
+                                                    <li class="breadcrumb-item">{{ breadcrumb_item.label|dtrans }}</li>
+                                                {% else %}
+                                                    <li class="breadcrumb-item active">{{ breadcrumb_item.label|dtrans }}</li>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endblock %}
+                                </ol>
+                            </div>
+                            {% block pageTitle %}
+                                <h4 class="page-title">{{ pageTitle }}</h4>
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+
+                {% set mappingType = {'error':'danger', 'warning': 'warning', 'success': 'success', 'danger': 'danger', 'info': 'info'} %}
+                {% set mappingIcon = {'error':'close-circle-line', 'warning': 'alert-line', 'success': 'check-line', 'danger': 'close-circle-line', 'info': 'information-line'} %}
+                {% for messageType in ['error', 'warning', 'success', 'danger', 'info'] %}
+                    {% for message in app.flashes(messageType) %}
+                        <div class="alert alert-{{ mappingType[messageType] }} alert-dismissible fade show"
+                             role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <i class="ri-{{ mappingIcon[messageType] }} me-1"></i> {{ message|dtrans }}
+                        </div>
+
+                    {% endfor %}
+                {% endfor %}
+
+                <!-- end page title -->
+                {% block body %}{% endblock %}
+
+            </div> <!-- content -->
+
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ 'now'|date('Y') }} © DS Module System (<a href="https://www.dsmodulesystem.com/" target="_blank">www.dsmodulesystem.com</a>)
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-md-end footer-links d-none d-md-block">
+                                <a href="{{ path('core_information') }}">{{ 'core.layout.aboutTitle'|dtrans }}</a>
+                                <a href="https://www.dsmodulesystem.com" target="_blank">{{ 'core.layout.contactUsTitle'|dtrans }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end Footer -->
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="apiFormFile" tabindex="-1" role="dialog" aria-labelledby="apiFormFileLabel" aria-hidden="true"></div>
+<div class="modal fade" id="apiForm" tabindex="-1" role="dialog" aria-labelledby="apiFormLabel" aria-hidden="true" data-bs-backdrop="static"></div>
+<div id="loader" class="loader-wrap"><div class="loader-content"><div class="ds-logo"><img src="{{ asset('images/ds-module-system-logo-simple.png') }}"/></div><div class="loader-img"></div></div></div>
+
+{% block javascript_bottom %}{% endblock %}
+</body>
+</html>

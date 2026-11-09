@@ -1,0 +1,26 @@
+# Warehouse controller translations
+leftMenu.warehouses: 'Warehouses'
+leftMenu.warehouseStocks: 'Stocks'
+
+createWarehouseTitle: 'Create Warehouse'
+editWarehouseTitle: 'Edit Warehouse'
+
+createWarehouseStockTitle: 'Create Stock'
+editWarehouseStockTitle: 'Edit Stock'
+
+name: 'Name'
+address: 'Address'
+description: 'Description'
+warehouse: 'Warehouse'
+product: 'Product'
+quantity: 'Quantity'
+measure: 'Measure Unit'
+created_at: 'Created At'
+updated_at: 'Updated At'
+created_by: 'Created By'
+quantityFrom: 'Quantity From'
+quantityTo: 'Quantity To' 
+allWarehouses: 'All Warehouses'
+allProducts: 'All Products'
+chooseWarehouse: 'Choose warehouse'
+chooseProduct: 'Choose product'

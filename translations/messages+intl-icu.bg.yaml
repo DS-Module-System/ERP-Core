@@ -1,0 +1,98 @@
+
+leftMenu:
+  administration: Администрация
+  dashboard: Табло
+  information: Информация
+
+layout:
+  Apr: Април
+  Aug: Август
+  Dec: Декември
+  Feb: Февруари
+  Friday: Петък
+  Jan: Януари
+  Jul: Юли
+  Jun: Юни
+  Mar: Март
+  May: Май
+  Monday: Понеделник
+  Nov: Ноември
+  Oct: Октомври
+  Saturday: Събота
+  Sep: Септември
+  Sunday: Неделя
+  Thursday: Четвъртък
+  Tuesday: Вторник
+  Wednesday: Сряда
+  aboutTitle: 'За нас'
+  chooseTitle: Избери
+  clearBtnTitle: Изчисти
+  contactBtnTitle: Контакти
+  contactUsTitle: Контакти
+  deleteBtnTitle: Изтрий
+  deleteFlashMsg: 'Успешно изтрихте записа!'
+  errorDeleteFlashMsg: 'Не можете да изтриете записа!'
+  deleteConfirmModalTitle: 'Потвърждение за изтриване'
+  deleteConfirmModalBody: 'Сигурни ли сте, че искате да изтриете записа?'
+  cancelBtnTitle: 'Отказ'
+  id: Ид
+  languagesTitle: Езици
+  logoutTitle: Излез
+  myAcountTitle: Акаунт
+  navigationTitle: Навигация
+  newFeatureRequesMsg: 'Нужда от подобрения в програмата? Свържете се с нас'
+  noTitle: Не
+  saveBtnTitle: Запази
+  saveAndContinueBtnTitle: 'Запази и Остани'
+  saveAndNewBtnTitle: 'Запази и Добави нов'
+  searchBtnTitle: Търси
+  searchBy: Търсите по:
+  successCreateFlashMsg: 'Успешно създадохте записа!'
+  successEditFlashMsg: 'Успешно редактирахте записа!'
+  supportTitle: Поддръжка
+  userTitle: Потребител
+  welcome: 'Добре дошли'
+  yesTitle: Да
+  actionTitle: Действия
+  permissionsError: 'Нямате достъп! Свържете се с администратор'
+
+module:
+  ItemPerPage: Покажи
+  actionTitle: Действие
+  addRecordBtnTitle: 'Нов запис'
+  addProformaTitle: 'Нова проформа'
+  backBtnTitle: Назад
+  deleteBtnTitle: Изтрий
+  editBtnTitle: Редактирай
+  exportBtnTitle: Експорт
+  filterActiveTitle: Активен
+  filterInactiveTitle: Неактивен
+  filterIsTitle: Филтърът
+  hasErrorInForm: 'Във формата има грешки. Моля, превъртете надолу, за да ги видите.'
+  id: ИД
+  paginationAllTitle: Всички
+  saveBtnTitle: Запази
+  searchBtnTitle: Търси
+  searchFormTitle: Търсене
+  actionsTitle: Действие
+  delete.row: 'Изтрий този ред'
+  add.row: 'Добави ред'
+  flow.row: 'Размести този ред'
+  viewBtnTitle: Преглед
+  actions: Действия
+  recordTitle: Записи
+
+dscmsInformation:
+  company: Компания
+  documentation: Документация
+  product: Продукт
+  supportEmail: 'Имейл за поддръжка'
+  web: 'Уеб сайт'
+
+table:
+  confirmation.save: 'Потвърждаване'
+  confirmation.save.message: 'Сигурни ли сте, че искате да запазите промените?'
+  stopBtn: 'Отказ'
+
+userGroup:
+  name: 'Име'

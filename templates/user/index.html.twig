@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% import 'core/default_templates/form_search.html.twig' as form_search %}
+{% import 'core/default_templates/data_table_macro.html.twig' as data_table %}
+
+{% block body %}
+    {{ form_search.form_search(form, ["email", "user_group"]) }}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            {{ data_table.new_btn('user_create') }}
+                        </div>
+                        <div class="col-sm-8 text-end">
+                            {{ data_table.item_per_page(rows.route, rows.query) }}
+                        </div>
+                    </div>
+
+                    <div class="table-responsive d-md-block">
+                        <table class="table ds-table-sm w-100 dt-responsive nowrap table-bordered" data-table-sticky="">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th style="width: 85px;">{{ 'core.module.actionTitle'|dtrans }}</th>
+                                    {{ data_table.th("layout.id") }}
+                                    {{ data_table.th("user.isActive") }}
+                                    {{ data_table.th("user.full.names")}}
+                                    {{ data_table.th("user.email", false, 'email') }}
+                                    {{ data_table.th("user.groups") }}
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for row in rows %}
+                                <tr>
+                                    <td>
+                                         <a href="{{ path('user_edit', {"id": row.id}) }}" title="{{ 'core.module.editBtnTitle'|dtrans }}"
+                                            class="btn btn-sm btn-primary mb-2" style="white-space: nowrap;">
+                                            <i class="mdi mdi-square-edit-outline"></i>
+                                            {{ 'core.module.editBtnTitle'|dtrans }}
+                                        </a>
+                                        <a href="{{ path('user_change_password', {"id": row.id}) }}" title="{{ 'user.changePasswordBtnTitle'|dtrans }}"
+                                            class="btn btn-sm btn-info" style="white-space: nowrap;">{{ 'user.changePasswordBtnTitle'|dtrans }}
+                                        </a>
+                                    </td>
+                                    <td>{{ row.id }}</td>
+                                    <td>{{ row.isActive ? ('<span class="badge bg-success">'~('user.active'|dtrans)~'</span>')|raw : ('<span class="badge bg-danger">'~('user.deactive'|dtrans)~'</span>')|raw }}</td>
+                                    <td>{{ row.fullName }}</td>
+                                    <td>{{ row.email }}</td>
+                                    <td>
+                                        {% for group in row.userGroups %}
+                                            {{ group.name }},
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {{ knp_pagination_render(rows) }}
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+{% endblock %}

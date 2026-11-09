@@ -1,0 +1,34 @@
+{% if form is defined %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'data-form-save': 'save'}}) }}
+    {{ form_row(form._token) }}
+{% endif %}
+<div class="row">
+    <div class="col-md-12 col-lg-9">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title">{% block head_title %}{% endblock %}</h4>
+
+                {# Multiple using block #}
+                {{ block('form_btns') }}
+
+                <div class="mt-3 mb-2 {% if form is defined and not form.vars.valid %}was-validated{% endif %}">
+                    {% if form is defined %}
+                        {% include 'core/default_templates/form_main_error.html.twig' %}
+                    {% endif %}
+
+                    {% block form_before_fields %}{% endblock %}
+
+                    {% block form_fields %}{% endblock %}
+
+                    {% block form_after_fields %}{% endblock %}
+                </div>
+
+                {# Multiple using block #}
+                {{ block('form_btns') }}
+            </div>
+        </div>
+    </div>
+</div>
+{% if form is defined %}
+    {{ form_end(form, {'render_rest': false}) }}
+{% endif %}

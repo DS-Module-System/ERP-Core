@@ -1,0 +1,30 @@
+# Page titles
+createCashTitle: 'Create Cash Transaction'
+editCashTitle: 'Edit Cash Transaction'
+
+# Fields
+transactionDate: 'Transaction Date'
+amount: 'Amount'
+transactionType: 'Transaction Type'
+createdBy: 'Created By'
+createdAt: 'Created At'
+transactionDateFrom: 'Date From'
+transactionDateTo: 'Date To'
+amountFrom: 'Amount From'
+amountTo: 'Amount To'
+
+# Enum values
+transactionTypeIncome: 'Income'
+transactionTypeExpense: 'Expense'
+
+# Column headers
+transaction_date: 'Transaction Date'
+transaction_type: 'Type'
+created_by: 'Created By'
+created_at: 'Created At'
+
+# Menu
+leftMenu:
+  cash: 'Cash' 
+
+alltypes: 'All types'

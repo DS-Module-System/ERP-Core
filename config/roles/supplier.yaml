@@ -1,0 +1,8 @@
+parameters:
+    supplier_roles:
+        # Supplier management roles
+        "ROLE_SUPPLIER_VIEW": "roles.role_supplier_view"
+        "ROLE_SUPPLIER_CREATE": "roles.role_supplier_create"
+        "ROLE_SUPPLIER_EDIT": "roles.role_supplier_edit"
+        "ROLE_SUPPLIER_DELETE": "roles.role_supplier_delete"
+        "ROLE_SUPPLIER_APPROVE": "roles.role_supplier_approve" 

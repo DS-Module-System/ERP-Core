@@ -1,0 +1,69 @@
+{% macro form_search(form, fields, backUrlRouteParams={}) %}
+    <div class="row">
+        <div class="col-12">
+            {% if app.request.get(form.vars.id) %}
+                <p>{{ 'core.module.filterIsTitle'|dtrans }} <span class="badge badge-success-lighten">{{ 'core.module.filterActiveTitle'|dtrans }}</span> !</p>
+            {% else %}
+                <p>{{ 'core.module.filterIsTitle'|dtrans }} <span class="badge badge-danger-lighten">{{ 'core.module.filterInactiveTitle'|dtrans }}</span> !</p>
+            {% endif %}
+        </div>
+        <div class="col-12 mb-3">
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#searchForm">
+                <i class="ri-search-line noti-icon me-1"></i>{{ 'core.module.searchBtnTitle'|dtrans }}
+            </button>
+        </div>
+
+        <div class="col-12 fst-italic">
+            <p>
+                {{ 'core.layout.searchBy'|dtrans }}:
+                {% for field in fields %}
+                    {{ show_search_form_field(attribute(form, field))|raw }}
+                {% endfor %}
+            </p>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="searchForm" tabindex="-1" role="dialog" aria-labelledby="searchFormLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h5 class="modal-title" id="searchFormLabel">{{ 'core.module.searchFormTitle'|dtrans }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    {% for field in fields %}
+                                        <div class="form-group ds-form-group mb-3">
+                                            {% set realFieldObj = attribute(form, field) %}
+                                            {%  if realFieldObj.vars.block_prefixes[1] == 'choice' and (realFieldObj.vars.expanded is defined and realFieldObj.vars.expanded == false) %}
+                                                {% set attrClass = 'form-select' %}
+                                            {% else %}
+                                                {% set attrClass = 'form-control ds-form-control' %}
+                                            {% endif %}
+                                            {% if(realFieldObj.vars.attr.class is defined) %}
+                                                {% set attrClass = attrClass ~ ' ' ~ realFieldObj.vars.attr.class %}
+                                            {% endif %}
+                                            {{ form_label(realFieldObj) }}
+                                            {{ form_widget(realFieldObj, {"attr": {'class': attrClass}}) }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ path(app.request.get("_route"), backUrlRouteParams) }}" class="btn btn-secondary">{{ 'core.layout.clearBtnTitle'|dtrans }}</a>
+                            {{ form_widget(form.search, {'label': 'core.module.searchBtnTitle'|dtrans}) }}
+                        </div>
+                    </div>
+
+                {% if app.request.get('ipp') %}
+                    <input type="hidden" name="ipp" value="{{ app.request.get('ipp') }}">
+                {% endif %}
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
+        </div>
+    </div>
+{% endmacro %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% import 'core/default_templates/form_table_macro.html.twig' as form_table %}
+
+{% set form_btns = form_table.btns('user_list', form, true) %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'data-form-save': 'save'}}) }}
+    {{ form_row(form._token) }}
+    <div class="row">
+        <div class="col-md-12 col-lg-9">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">{{ 'user.editUserTitle'|dtrans }}</h4>
+                    {{ form_btns }}
+                    {% include 'user/form_fields.html.twig' with {"form": form} only %}
+                    {{ form_btns }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

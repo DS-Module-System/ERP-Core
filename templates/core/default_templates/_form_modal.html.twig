@@ -1,0 +1,38 @@
+<div class="modal-dialog" role="document">
+    <div class="mt-2 mb-3 {% if not form.vars.valid %}was-validated{% endif %}">
+        {% include default_templates/form_main_error.html.twig' %}
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'api-form'}}) }}
+        {{ form_row(form._token) }}
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{% block head_title %}{% endblock %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        {% block form_before_fields %}{% endblock %}
+
+                        {% block form_fields %}{% endblock %}
+
+                        {% block form_after_fields %}{% endblock %}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    {% block modal_form_btns %}
+                        <button type="button" id="{{ form.delete.vars['id'] }}" name="{{ form.delete.vars['full_name'] }}" class="btn btn-danger api-delete" data-url="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">
+                            <i class="mdi mdi-content-save me-1"></i>
+                            {{ 'core.layout.deleteBtnTitle'|dtrans }}
+                        </button>
+                        <button type="button" id="{{ form.save.vars['id'] }}" name="{{ form.save.vars['full_name'] }}" class="btn btn-success api-save" data-url="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">
+                            <i class="mdi mdi-content-save me-1"></i>
+                            {{ 'core.layout.saveBtnTitle'|dtrans }}
+                        </button>
+                    {% endblock %}
+{#                    {{ form_widget(form.save, {"attr": {"class": "btn btn-success api-save", "data-url": path('person_client_api_save', app.request.attributes.get('_route_params')) }}) }}#}
+                </div>
+            </div>
+        </div>
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+</div>

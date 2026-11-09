@@ -1,0 +1,187 @@
+{% extends 'main_skin.html.twig' %}
+
+{#{% block title %}Register{% endblock %}#}
+
+{% block body %}
+    {#    {% for flash_error in app.flashes('verify_email_error') %}#}
+    {#        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>#}
+    {#    {% endfor %}#}
+
+    {#    <h1>Register</h1>#}
+
+    {#    {{ form_errors(registrationForm) }}#}
+
+    {#    {{ form_start(registrationForm) }}#}
+    {#        {{ form_row(registrationForm.email) }}#}
+    {#        {{ form_row(registrationForm.plainPassword, {#}
+    {#            label: 'Password'#}
+    {#        }) }}#}
+    {#        {{ form_row(registrationForm.agreeTerms) }}#}
+
+    {#        <button type="submit" class="btn">Register</button>#}
+    {#    {{ form_end(registrationForm) }}#}
+
+{#    <div class="alert alert-success" role="alert">{{ flash_error }}</div>#}
+
+
+    <div class="container-fluid product-item-view my-4 pos logo-in-page-wrap pb-5" id="registration-page">
+        <a href="/"><img class="logo-in-page d-none d-lg-block" src="{{ asset('images/app/CR-black.svg') }}"/></a>
+        <div class="row">
+            <div class="col-12 offset-lg-2 col-lg-8 font-size-34 text-uppercase">
+                Регистрация
+            </div>
+
+
+
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+            {{ form_widget(form._token) }}
+            <div class="row">
+                <div class="col-12 offset-lg-2 col-lg-6 mt-lg-5">
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            {% set mappingType = {'error':'danger', 'warning': 'warning', 'success': 'success', 'danger': 'danger', 'info': 'info'} %}
+                            {% set mappingIcon = {'error':'close-circle-line', 'warning': 'alert-line', 'success': 'check-line', 'danger': 'close-circle-line', 'info': 'information-line'} %}
+                            {% for messageType in ['error', 'warning', 'success', 'danger', 'info'] %}
+                                {% for message in app.flashes(messageType) %}
+                                    <div class="alert alert-{{ mappingType[messageType] }} alert-dismissible fade show"
+                                         role="alert">
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        <i class="ri-{{ mappingIcon[messageType] }} me-1"></i> {{ message|dtrans }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="form-floating theme-form-floating mb-3">
+                                {{ form_widget(form.name) }}
+                                {{ form_label(form.name) }}
+                            </div>
+                            <div class="invalid-feedback">{{ form_errors(form.name) }}</div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-floating theme-form-floating mb-3">
+                                {{ form_widget(form.family) }}
+                                {{ form_label(form.family) }}
+                                <div class="invalid-feedback">{{ form_errors(form.family) }}</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-floating theme-form-floating mb-3">
+                                {{ form_widget(form.email) }}
+                                {{ form_label(form.email) }}
+                                <div class="invalid-feedback">{{ form_errors(form.email) }}</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-floating theme-form-floating mb-3">
+                                {{ form_widget(form.type) }}
+                                {{ form_label(form.type) }}
+                                <div class="invalid-feedback">{{ form_errors(form.type) }}</div>
+                            </div>
+                        </div>
+
+                        {% for passwordOption in form.plainPassword %}
+                            <div class="col-12 col-md-6">
+                                <div class="form-floating theme-form-floating mb-3">
+                                    {{ form_widget(passwordOption) }}
+                                    {{ form_label(passwordOption) }}
+                                    <div class="invalid-feedback">{{ form_errors(passwordOption) }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+
+                        <div class="row mt-3">
+                            <div class="col-12 mb-3">
+                                {{ form_widget(form.isInvoiceRequired) }}
+                                {{ form_label(form.isInvoiceRequired) }}
+                                <div class="invalid-feedback">{{ form_errors(form.isInvoiceRequired) }}</div>
+                            </div>
+                            <div class="row invoice-data {{ form.isInvoiceRequired.vars.checked is defined and form.isInvoiceRequired.vars.checked == true ? '' : 'd-none' }}">
+                                <div class="col-12">
+                                    <div class="form-floating theme-form-floating mb-3">
+                                        {{ form_widget(form.invoiceType) }}
+                                        {{ form_label(form.invoiceType) }}
+                                        <div class="invalid-feedback">{{ form_errors(form.invoiceType) }}</div>
+                                    </div>
+                                </div>
+                                {% set invoiceTypeValue = form.invoiceType.vars.value ? form.invoiceType.vars.value : 'legalEntity' %}
+                                <div class="col-12 col-md-6" data-invoice-type="{{ invoiceTypeValue }}">
+                                    <div class="form-floating theme-form-floating mb-3">
+                                        {{ form_widget(form.invoiceRecipient) }}
+                                        <label data-invoice-type-item="legalEntity" for="{{ form.invoiceRecipient.vars.id is defined ? form.invoiceRecipient.vars.id }}">Име на фирма</label>
+                                        <label data-invoice-type-item="individual" for="{{ form.invoiceRecipient.vars.id is defined ? form.invoiceRecipient.vars.id }}">Име</label>
+                                        <div class="invalid-feedback">{{ form_errors(form.invoiceRecipient) }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6" data-invoice-type="{{ invoiceTypeValue }}">
+                                    <div class="form-floating theme-form-floating mb-3">
+                                        {{ form_widget(form.invoiceRecipientIdentificationNumber) }}
+                                        <label data-invoice-type-item="legalEntity" for="{{ form.invoiceRecipientIdentificationNumber.vars.id is defined ? form.invoiceRecipientIdentificationNumber.vars.id }}">ЕИК</label>
+                                        <label data-invoice-type-item="individual" for="{{ form.invoiceRecipientIdentificationNumber.vars.id is defined ? form.invoiceRecipientIdentificationNumber.vars.id }}">ЕГН</label>
+                                        <div class="invalid-feedback">{{ form_errors(form.invoiceRecipientIdentificationNumber) }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6" data-invoice-type="{{ invoiceTypeValue }}">
+                                    <div class="form-floating theme-form-floating mb-3">
+                                        {{ form_widget(form.vat) }}
+                                        {{ form_label(form.vat) }}
+                                        <div data-invoice-type-item="legalEntity" class="invalid-feedback">{{ form_errors(form.vat) }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6" data-invoice-type="{{ invoiceTypeValue }}">
+                                    <div class="form-floating theme-form-floating mb-3">
+                                        {{ form_widget(form.invoiceMol) }}
+                                        {{ form_label(form.invoiceMol) }}
+                                        <div data-invoice-type-item="legalEntity" class="invalid-feedback">{{ form_errors(form.invoiceMol) }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-floating theme-form-floating mb-3">
+                                        {{ form_widget(form.invoiceCity) }}
+                                        {{ form_label(form.invoiceCity) }}
+                                        <div data-invoice-type-item="legalEntity" class="invalid-feedback">{{ form_errors(form.invoiceCity) }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-floating theme-form-floating mb-3">
+                                        {{ form_widget(form.invoiceAddress) }}
+                                        {{ form_label(form.invoiceAddress) }}
+                                        <div data-invoice-type-item="legalEntity" class="invalid-feedback">{{ form_errors(form.invoiceAddress) }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mt-5">
+                        <div class="col-12 mt-2">
+                            {{ form_widget(form.privacyPolicy) }}
+                            <label for="{{ form.privacyPolicy.vars.id }}">Съгласен съм с <a href="#">политиката за поверителност</a> на данните</label>
+                            <div class="invalid-feedback">{{ form_errors(form.privacyPolicy) }}</div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            {{ form_widget(form.termsAndConditions) }}
+                            <label for="{{ form.termsAndConditions.vars.id }}">Запознах се с <a href="#">Общите условия</a> и ги приемам</label>
+                            <div class="invalid-feedback">{{ form_errors(form.termsAndConditions) }}</div>
+                        </div>
+                        <div class="col-12 mt-2">
+                            {{ form_widget(form.overSixteen) }}
+                            <label for="{{ form.overSixteen.vars.id }}">Имам навършени 16 години</label>
+                            <div class="invalid-feedback">{{ form_errors(form.overSixteen) }}</div>
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <button class="custom-btn-black text-uppercase">Регистрация</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form, {'render_rest': false}) }}
+        </div>
+    </div>
+
+{% endblock %}

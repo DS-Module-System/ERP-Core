@@ -1,0 +1,182 @@
+{% macro new_btn(route_path, params = {}) %}
+    <a href="{{ path(route_path, params) }}" class="btn btn-primary mb-2"><i
+                class="mdi mdi-plus-circle me-1"></i>{{ 'core.module.addRecordBtnTitle'|dtrans }}</a>
+{% endmacro %}
+
+{% macro export_btn() %}
+    <button class="do-export list-container-btn" name="do[Export]">{{ 'core.module.exportBtnTitle'|dtrans }}</button>
+{% endmacro %}
+
+{% macro delete_btn(path_name, params = {}) %}
+    <button type="button" class="btn btn-danger me-4 mb-2 ms-3" data-bs-toggle="modal" data-bs-target="#danger-header-modal"><i class="mdi mdi-delete me-1"></i>Изтрий</button>
+    <div id="danger-header-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-colored-header bg-danger">
+                    <h5 class="modal-title" id="danger-header-modalLabel">Потвърждение за изтриване</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                </div>
+                <div class="modal-body text-start">
+                    Сигурни ли сте, че искате да изтриете записите ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Прекъсни</button>
+                    <button type="submit" id="estate_form_delete" name="dataTableDelete" class="btn btn-danger">
+                        <i class="mdi mdi-delete me-1"></i>
+                        Изтрий
+                        <i class=""></i>
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+{% endmacro %}
+
+{% macro get_column_sort_link(sort_column_name, multiple = false) %}
+    {% set sort_query = app.request.get('sortQuery', []) %}
+
+    {% set sort_value = null %}
+    {% if sort_query[sort_column_name] is not defined or (sort_query[sort_column_name] is defined and sort_query[sort_column_name] is empty) %}
+        {% set sort_value = "ASC" %}
+    {% elseif sort_query[sort_column_name] == 'ASC' %}
+        {% set sort_value = "DESC" %}
+    {% elseif sort_query[sort_column_name] == 'DESC' %}
+        {% set sort_value = "" %}
+    {% endif %}
+
+    {% if multiple == false %}
+        {% set sort_query = [] %}
+    {% endif %}
+
+    {% if sort_value is not null %}
+        {% set sort_query = sort_query|merge({(sort_column_name): sort_value}) %}
+    {% else %}
+        {% set sort_query = sort_query|filter((v, k) => k != sort_column_name) %}
+    {% endif %}
+    {{ path(app.request.get('_route'), app.request.get('_route_params')|merge(app.request.query.all|merge({"sortQuery": sort_query}))) }}
+{% endmacro %}
+
+{% macro get_column_sort_class(sort_column_name) %}
+    {% set sort_query = app.request.get('sortQuery', []) %}
+
+    {% if sort_query[sort_column_name] is not defined or (sort_query[sort_column_name] is defined and sort_query[sort_column_name] is empty) %}
+        {% set sort_value = "sorting" %}
+    {% elseif sort_query[sort_column_name] == 'ASC' %}
+        {% set sort_value = "sorting_asc" %}
+    {% elseif sort_query[sort_column_name] == 'DESC' %}
+        {% set sort_value = "sorting_desc" %}
+    {% else %}
+        {% set sort_value = "sorting" %}
+    {% endif %}
+    {{ sort_value }}
+{% endmacro %}
+
+{% macro th(title, is_lng = false, sort_column_name = '') %}
+    {% import _self as data_table %}
+    {% if is_lng == false %}
+        {% if sort_column_name is not empty %}
+            <th class="ds-table-sort-column {{ data_table.get_column_sort_class(sort_column_name)|trim }}" onclick="if(event.ctrlKey === false){window.location.href = '{{ data_table.get_column_sort_link(sort_column_name)|trim|raw }}';}else{window.location.href = '{{ data_table.get_column_sort_link(sort_column_name, true)|trim|raw }}';}">{{ title|dtrans }}</th>
+        {% else %}
+            <th>{{ title|dtrans }}</th>
+        {% endif %}
+    {% else %}
+        {% for lng in lngs %}
+            <th class="lng-column {{ lng }}"><span>{{ title|dtrans }}</span> <span class="lng lng-{{ lng }}"></span></th>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+
+{% macro checkbox(id = 0) %}
+    {% if id == 0 %}
+        <div class="form-check mb-2">
+            <input type="checkbox" class="form-check-input customCheckAll" id="customCheckAll">
+            <label class="form-check-label" for="customCheckAll">&nbsp;</label>
+        </div>
+    {% else %}
+        <div class="form-check mb-2">
+            <input type="checkbox" name="checked[{{ id }}]" id="customCheck{{ id }}" class="form-check-input">
+            <label class="form-check-label" for="customCheck{{ id }}">&nbsp;</label>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro item_per_page(route, query) %}
+    <label>{{ 'core.module.ItemPerPage'|dtrans }}
+        <select style="width: auto;" class="form-select form-select-sm ms-1 d-inline-block"
+                onchange="window.location.href = '{{ path(route, query|merge({"ipp": "_replace_ipp", 'page': 1})) }}'.replace('_replace_ipp', this.value)">
+            <option value="25" {% if app.request.get('ipp') == 25 %}selected="selected"{% endif %}>25</option>
+            <option value="50" {% if app.request.get('ipp') == 50 %}selected="selected"{% endif %}>50</option>
+            <option value="100" {% if app.request.get('ipp') == 100 %}selected="selected"{% endif %}>100</option>
+            <option value="250" {% if app.request.get('ipp') == 250 %}selected="selected"{% endif %}>250</option>
+            <option value="500" {% if app.request.get('ipp') == 500 %}selected="selected"{% endif %}>500</option>
+            <option value="1000" {% if app.request.get('ipp') == 1000 %}selected="selected"{% endif %}>1000</option>
+        </select>
+    </label>
+{% endmacro %}
+
+{% macro get_nested_object(obj, str, type = '', valuesArr, trans = false) %}
+{#    {% dump(trans) %}#}
+    {% set value = obj %}
+    {% if "." in str %}
+        {% set props = str|split(".") %}
+        {% for prop in props %}
+            {% if value is null %}
+                {% set value = '' %}
+            {% else %}
+                {% set value = attribute(value, prop) %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% set value = attribute(obj, str) %}
+    {% endif %}
+
+    {% if type == 'date' %}
+        {% if value %}
+            {{ value|date(date_format) }}
+        {% endif %}
+    {% elseif type == 'datetime' %}
+        {% if value %}
+            {{ value|date(datetime_format) }}
+        {% endif %}
+    {% elseif type == 'price' %}
+        {{ value|number_format(2) }}
+    {% elseif type == 'array' %}
+        {% if value in valuesArr|keys %}
+            {{ trans ? valuesArr[value]|dtrans : valuesArr[value] }}
+        {% else %}
+            {{ trans ? value|dtrans : value }}
+        {% endif %}
+    {% elseif type == 'boolean' %}
+        {% if value == 1 %}
+            <span class="badge bg-success">{{ 'core.layout.yesTitle'|dtrans }}</span>
+        {% else %}
+            <span class="badge bg-danger">{{ 'core.layout.noTitle'|dtrans }}</span>
+        {% endif %}
+    {% else %}
+        {{ trans ? value|dtrans : value }}
+    {% endif %}
+{% endmacro %}
+
+{% macro table(rows, config = {}) %}
+
+    {% set tableOptions = {
+        'template': is_modal_request() ? 'core/default_templates/_table.html.twig' : 'core/default_templates/_table.html.twig',
+        'config': config
+    } %}
+
+    {% embed tableOptions.template with tableOptions %}
+
+    {% endembed %}
+{% endmacro %}
+
+
+{% macro div(title, is_lng = false) %}
+    {% if is_lng == false %}
+        <div>{{ title }}</div>
+    {% else %}
+        {% for lng in lngs %}
+            <div class="lng-column {{ lng }}"><span>{{ title }}</span> <span class="lng lng-{{ lng }}"></span></div>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}

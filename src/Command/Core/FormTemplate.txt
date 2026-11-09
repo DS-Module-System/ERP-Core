@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\{#ENTITY_NAME#};
+use App\Form\DefaultForm\EditForm;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+{#USE_CLASS#}
+
+class {#ENTITY_NAME#}Form extends EditForm
+{
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+
+        parent::buildForm($builder, $options);
+
+        $builder
+{#FORM_FIELDS#}
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => {#ENTITY_NAME#}::class,
+        ]);
+    }
+
+}

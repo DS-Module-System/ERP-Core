@@ -1,0 +1,18 @@
+# Delivery controller translations
+leftMenu.deliveries: 'Доставки'
+
+createDeliveryTitle: 'Създаване на доставка'
+editDeliveryTitle: 'Редактиране на доставка'
+
+deliveryDate: 'Дата на доставка'
+createdBy: 'Създадена от'
+createdAt: 'Създадена в'
+supplier: 'Доставчик'
+warehouse: 'Склад'
+finalPrice: 'Крайна цена' 
+cardTitle: 'Детайли за доставка'
+allWarehouses: 'Всички складове'
+allDeliveries: 'Всички доставки'
+allProducts: 'Всички продукти'
+chooseWarehouse: 'Изберете склад'
+chooseSupplier: 'Изберете доставчик'

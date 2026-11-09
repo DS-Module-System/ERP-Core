@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Системни роли{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Начало</a></li>
+                            <li class="breadcrumb-item"><a href="{{ path('user_list') }}">Потребители</a></li>
+                            <li class="breadcrumb-item active">Системни роли</li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Системни роли</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="header-title">Всички роли в системата</h4>
+                        <p class="text-muted mb-0">Списък на всички роли, групирани по модули</p>
+                    </div>
+                    <div class="card-body">
+                        {% for module, roles in rolesByModule %}
+                            <div class="mb-4">
+                                <h5 class="text-primary">{{ module }}</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th width="30%">Роля</th>
+                                                <th>Описание</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for role, description in roles %}
+                                                <tr>
+                                                    <td><code>{{ role }}</code></td>
+                                                    <td>{{ description }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="header-title">Йерархия на ролите</h4>
+                        <p class="text-muted mb-0">Как ролите се наследяват една от друга</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Роля</th>
+                                        <th>Наследени роли</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for role, inheritedRoles in roleHierarchy %}
+                                        <tr>
+                                            <td><code>{{ role }}</code></td>
+                                            <td>
+                                                {% if inheritedRoles|length > 0 %}
+                                                    {% for inheritedRole in inheritedRoles %}
+                                                        <span class="badge bg-secondary me-1">{{ inheritedRole }}</span>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <span class="text-muted">Няма наследени роли</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="header-title">Статистика</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h3 class="text-primary">{{ allRoles|length }}</h3>
+                                    <p class="text-muted">Общо роли</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h3 class="text-success">{{ rolesByModule|length }}</h3>
+                                    <p class="text-muted">Модула</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h3 class="text-info">{{ roleHierarchy|length }}</h3>
+                                    <p class="text-muted">Йерархични роли</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h3 class="text-warning">{{ allRoles|filter((v, k) => k starts with 'ROLE_USER_')|length }}</h3>
+                                    <p class="text-muted">Потребителски роли</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %} 

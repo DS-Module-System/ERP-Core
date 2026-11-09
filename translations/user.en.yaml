@@ -1,0 +1,30 @@
+active: Active
+changePasswordBtnTitle: 'Change password'
+createNewUserTitle: 'Create new user'
+deactive: Inactive
+editPasswordTitle: 'Change user password'
+editUserTitle: 'Edit user'
+email: Email
+errorEmailFlashMsg: 'You cannot delete the user!'
+groups: Groups
+isActive: Approve
+password: Password
+successChangePasswordFLashMsg: 'You have successfully changed the user password!'
+userGroup: Groups
+userGroup.addUserGroupTitle: 'Create new group'
+userGroup.editUserGroupTitle: 'Edit group'
+userGroup.errorSameNameFlashMsg: 'Error! There is a group with the same name!'
+userGroup.name: Name
+userGroup.roles: Roles
+enableTwoFa: 'Two FA ?'
+name: Name
+family: Family
+full.names: Names
+chooseGroup: 'Choose group'
+
+layout.userTitle: User
+leftMenu.userGroups: 'User groups'
+leftMenu.users: Users
+
+rememberMe: Remember me
+loginBtnTitle: Login

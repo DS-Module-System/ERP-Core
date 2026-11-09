@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% import 'core/default_templates/form_search.html.twig' as form_search %}
+{% import 'core/default_templates/data_table_macro.html.twig' as data_table %}
+
+{% block body %}
+    {{ form_search.form_search(form, ["name"]) }}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            {{ data_table.new_btn('user_group_create') }}
+                        </div>
+                        <div class="col-sm-8 text-end">
+                            {{ data_table.item_per_page(rows.route, rows.query) }}
+                        </div>
+                    </div>
+
+                    <div class="table-responsive d-md-block">
+                        <table class="table ds-table-sm w-100 dt-responsive nowrap table-bordered" data-table-sticky="">
+                            <thead class="thead-light">
+                            <tr>
+                                <th style="width: 85px;">{{ 'core.module.actionTitle'|dtrans }}</th>
+                                {{ data_table.th("layout.id") }}
+                                {{ data_table.th("userGroup.name") }}
+                                {{ data_table.th("userGroup.roles") }}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for row in rows %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('user_group_edit', {"id": row.id}) }}" title="{{ 'core.module.editBtnTitle'|dtrans }}"
+                                            class="btn btn-sm btn-primary text-nowrap"><i class="mdi mdi-square-edit-outline"></i>{{ 'core.module.editBtnTitle'|dtrans }}
+                                        </a>
+                                    </td>
+                                    <td>{{ row.id }}</td>
+                                    <td>{{ row.name }}</td>
+                                    <td>
+                                        {% for role in row.roles %}
+                                            {% if roles[role] is defined %}
+                                                {{ roles[role]|dtrans }},
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {{ knp_pagination_render(rows) }}
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+
+{% endblock %}

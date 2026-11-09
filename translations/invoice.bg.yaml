@@ -1,0 +1,170 @@
+# Преводи за модул фактури
+leftMenu.invoices: Фактури
+title: Фактура
+number: Номер на фактура
+date: Дата на фактура
+dueDate: Падеж
+customer: Клиент
+amount: Сума
+total: Общо
+subtotal: Междинна сума
+tax: Данък
+discount: Отстъпка
+status: Статус
+description: Описание
+items: Артикули
+quantity: Количество
+unitPrice: Единична цена
+lineTotal: Сума по ред
+client: Клиент
+addClientBtnTitle: Добави клиент
+hourLabel: Час
+unitLabel: бр
+choose: Моля, изберете
+
+# Стойности на статус
+statusValues:
+  draft: Чернова
+  sent: Изпратена
+  paid: Платена
+  overdue: Просрочена
+  cancelled: Анулирана
+
+# Действия
+actions:
+  create: Създай фактура
+  edit: Редактирай фактура
+  delete: Изтрий фактура
+  send: Изпрати фактура
+  markPaid: Отбележи като платена
+  download: Изтегли PDF
+  preview: Преглед
+
+# Етикети на форма
+form:
+  customerSelect: Избери клиент
+  addItem: Добави артикул
+  removeItem: Премахни артикул
+  calculateTotal: Изчисли общо
+  
+# Съобщения
+messages:
+  created: Фактурата е създадена успешно
+  updated: Фактурата е обновена успешно
+  deleted: Фактурата е изтрита успешно
+  sent: Фактурата е изпратена успешно
+  paid: Фактурата е отбелязана като платена
+  notFound: Фактурата не е намерена
+  cannotDelete: Не може да изтриете фактурата - тя е изпратена
+
+# Заглавия на страници
+createInvoiceTitle: Създаване на фактура
+createCreditTitle: Създаване на кредитно известие
+createDebitTitle: Създаване на дебитно известие
+editInvoiceTitle: Редактиране на фактура
+
+# Типове документи и статуси
+typeDocument: Тип документ
+invoice: Фактура
+creditNote: Кредитно известие
+debitNote: Дебитно известие
+original: Оригинал
+copy: Копие
+
+# Заглавия на таблици и полета от форми
+qty: Кол.
+pricePerItem: Цена за единица
+value: Стойност
+priceWithoutDiscount: Цена без отстъпка
+basePrice: Основна цена
+priceForPay: Сума за плащане
+vatNumber: ДДС номер
+vatBase: Данъчна основа
+item: Артикул
+unitCost: Единична цена
+price: Цена
+toInvoice: Към фактура
+issueDate: Дата на издаване
+taxDate: Падежна дата
+createdAt: Дата на създаване
+subTotalPrice: Междинна цена
+promotionPrice: Цена с отстъпка
+taxBasePrice: Данъчна основа
+ddsPercentage: ДДС процент
+totalPrice: Обща цена
+note: Забележка
+publisher: Създал
+bankAccount: Банкова сметка
+vat: ДДС
+paymentMethod: Начин на плащане
+InvoicePaymentMethod:
+  paymentMethodBank: Банков превод
+ddsOption: ДДС опция
+issueCreditNote: Издай кредитно
+issueDebitNote: Издай дебитно
+
+# Функционалност за имейл
+sendEmailBtn: Изпрати имейл
+cancelEmailBtn: Отмени имейл
+
+# Печатане и експорт
+printTitle: Печат
+exportTitle: Експорт
+languages: Езици
+bulgarian: Български
+english: Английски
+documentType: Тип
+includeBgnPrice: Включи цени в BGN
+includeReport: Включи репорт файл
+
+# Банкови детайли
+bankDetails: Банкови данни
+bank: Банка
+
+# Информация за клиент
+billTo: Платец
+issuedBy: Издадена от
+amountInWords: Сума с думи
+showInvoiceClientData: Покажи клиентските данни от фактурата
+getClientData: Вземи данните за клиента
+invoiceClientDataSaved: Записани клиентски данни от фактурата
+
+# Действия и бутони
+close: Затвори
+print: Печат
+yes: Да
+no: Не
+
+# Инструкции за плащане
+paymentInstructionsBg: Моля, извършвайте плащания чрез банков превод към сметката, посочена по-долу, като се уверите, че сте включили номера на фактурата като референтен номер на плащането.
+vatReasonText: Основание за неначисляване на ДДС
+
+# Преводи специфични за шаблона на фактура  
+invoiceTemplate:
+  billTo: Платец
+  issuedBy: Издадена от
+  eek: ЕИК/ЕГН/ЛНЧ
+  issueDate: Дата на издаване
+  quantity: Количество 
+  address: Адрес
+  vatNumber: ДДС номер
+
+toIssueDate: До
+fromIssueDate: От
+netPrice: Нетна цена
+isPaid: Платена
+isPaid.placeholder: Изберете статус
+paymentMethod.placeholder: Изберете начин на плащане
+
+# Setting Company Info
+leftMenu.settingCompanyInfo: Настройки на компанията
+settingCompanyInfo:
+  companyData: Данни на компанията
+  companyName: Име на компанията
+  companyLogo: Лого на компанията
+  country: Страна
+  city: Град
+  address: Адрес
+  eik: ЕИК
+  ddsNumber: ДДС номер
+  mol: МОЛ

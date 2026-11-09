@@ -1,0 +1,7 @@
+parameters:
+    product_roles:
+        # Product roles
+        "ROLE_PRODUCT_VIEW": "roles.role_product_view"
+        "ROLE_PRODUCT_CREATE": "roles.role_product_create"
+        "ROLE_PRODUCT_EDIT": "roles.role_product_edit"
+        "ROLE_PRODUCT_DELETE": "roles.role_product_delete"

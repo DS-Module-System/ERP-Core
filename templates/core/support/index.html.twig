@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheet_after %}
+    {{ parent() }}
+    <style>
+        #supportIframe {
+            width: 100%;
+            height: 75vh;
+            padding: 0;
+            margin: 0;
+            border: none;
+        }
+    </style>
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script type="application/javascript">
+    window.addEventListener('message', function (e){
+        var supportIframe = document.getElementById('supportIframe');
+        if(supportIframe.src.indexOf(e.origin) !== 0){ return; }
+        supportIframe.style.height = e.data.windowHeight + 'px';
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+    <iframe id="supportIframe"
+            src="{{ support_ticket_system_link }}/{{ host }}?email={{ email }}"></iframe>
+{% endblock %}

@@ -1,0 +1,24 @@
+parameters:
+    level: 5
+    paths:
+        - src/
+        - tests/
+
+    # Допълнителни конфигурации за Symfony
+    symfony:
+        containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
+
+    # Изключване на файлове или директории от анализа
+    excludePaths:
+        - %currentWorkingDirectory%/var/*
+        - %currentWorkingDirectory%/vendor/*
+
+    # Допълнителни правила или разширения
+    scanFiles:
+        - %currentWorkingDirectory%/vendor/autoload.php
+
+includes:
+    # Включване на допълнителни разширения
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon

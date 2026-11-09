@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="col-sm-12">
+        {% if pageCount > 1 %}
+            <nav>
+                {% set align = 'right' %}
+                {% set classAlign = (align is not defined) ? '' : align=='center' ? ' justify-content-center' : (align=='right' ? ' justify-content-end' : '') %}
+                {% set classSize = (size is not defined) ? '' : size=='large' ? ' pagination-lg' : (size=='small' ? ' pagination-sm' : '') %}
+                <ul class="pagination{{ classAlign }}{{ classSize }} pagination-rounded">
+
+                    {% if previous is defined %}
+                        <li class="page-item paginate_button previous">
+                            <a class="page-link" rel="prev"
+                               href="{{ path(route, query|merge({(pageParameterName): previous})) }}"><i class="mdi mdi-chevron-left"></i></a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled paginate_button previous">
+                            <span class="page-link"><i class="mdi mdi-chevron-left"></i></span>
+                        </li>
+                    {% endif %}
+
+                    {% if startPage > 1 %}
+                        <li class="page-item paginate_button">
+                            <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): 1})) }}">1</a>
+                        </li>
+                        {% if startPage == 3 %}
+                            <li class="page-item paginate_button">
+                                <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): 2})) }}">2</a>
+                            </li>
+                        {% elseif startPage != 2 %}
+                            <li class="page-item disabled paginate_button">
+                                <span class="page-link">&hellip;</span>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+
+                    {% for page in pagesInRange %}
+                        {% if page != current %}
+                            <li class="page-item paginate_button">
+                                <a class="page-link"
+                                   href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item active paginate_button">
+                                <span class="page-link">{{ page }}</span>
+                            </li>
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {% if pageCount > endPage %}
+                        {% if pageCount > (endPage + 1) %}
+                            {% if pageCount > (endPage + 2) %}
+                                <li class="page-item disabled paginate_button">
+                                    <span class="page-link">&hellip;</span>
+                                </li>
+                            {% else %}
+                                <li class="page-item paginate_button">
+                                    <a class="page-link"
+                                       href="{{ path(route, query|merge({(pageParameterName): (pageCount - 1)})) }}">{{ pageCount -1 }}</a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                        <li class="page-item paginate_button">
+                            <a class="page-link"
+                               href="{{ path(route, query|merge({(pageParameterName): pageCount})) }}">{{ pageCount }}</a>
+                        </li>
+                    {% endif %}
+
+                    {% if next is defined %}
+                        <li class="page-item paginate_button next">
+                            <a class="page-link" rel="next"
+                               href="{{ path(route, query|merge({(pageParameterName): next})) }}"><i class="mdi mdi-chevron-right"></i></a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled paginate_button next">
+                            <span class="page-link"><i class="mdi mdi-chevron-right"></i></span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+    </div>
+</div>

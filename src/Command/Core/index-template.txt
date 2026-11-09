@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% import 'default_templates/form_search.html.twig' as form_search %}
+{% import 'default_templates/data_table_macro.html.twig' as data_table %}
+
+{% block body %}
+
+    {{ form_search.form_search(form, ["{#FIRST_FIELD_NAME#}"]) }}
+
+    {{ data_table.table(rows, {
+        "newLink": data_table.new_btn('{#TEMPLATE_FORDER_NAME#}_create'),
+        "cols" : {
+            "tableAction": {
+                "label": "module.actionTitle",
+                "edit": path('{#TEMPLATE_FORDER_NAME#}_edit', {"id": -1}),
+            },
+            {#TABLE_FIELDS#}
+        }
+    }) }}
+
+{% endblock %}
+

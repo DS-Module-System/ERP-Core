@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        table td {
+            padding: 5px 15px;
+            font-size: 16px;
+        }
+    </style>
+    <table>
+        <tr>
+            <td>{{ 'core.dscmsInformation.company'|dtrans }}:</td>
+            <td>{{ company_name }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'core.dscmsInformation.web'|dtrans }}:</td>
+            <td><a href="{{ website }}" target="_blank">{{ website }}</a></td>
+        </tr>
+        <tr>
+            <td>{{ 'core.dscmsInformation.product'|dtrans }}:</td>
+            <td>{{ short_product_name }} ({{ product_name}})</td>
+        </tr>
+        <tr>
+            <td>{{ 'core.dscmsInformation.supportEmail'|dtrans }}:</td>
+            <td><a href="mailto:{{ support_email }}">{{ support_email}}</a></td>
+        </tr>
+        <tr>
+            <td>{{ 'core.dscmsInformation.documentation'|dtrans }}:</td>
+            <td><a href="{{ documenttation_link }}" target="_blank">{{ documenttation_link }}</a></td>
+        </tr>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% import 'core/default_templates/form_table_macro.html.twig' as form_table %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item">Администрация</li>
+    <li class="breadcrumb-item">Потребители</li>
+    <li class="breadcrumb-item active">Моят акаунт</li>
+{% endblock %}
+
+{% set pageTitle = 'Моят акаунт' %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_row(form._token) }}
+    <div class="row">
+        <div class="col-md-12 col-lg-9">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Редактиране на профилни данни</h4>
+                    {% include 'user/me_form_fields.html.twig' with {"form": form} only %}
+                    <div class="row border-top border-bottom mt-2 pt-2 pb-2">
+                        <div class="col-6"></div>
+                        <div class="col-6 text-end">
+                            {{ form_widget(form.save) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form, {'render_rest': false}) }}
+
+    {{ form_start(changePasswordForm, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_row(changePasswordForm._token) }}
+    <div class="row">
+        <div class="col-md-12 col-lg-9">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">{{ 'user.editPasswordTitle'|dtrans }}</h4>
+                    <div class="mt-4 mb-4 {% if not changePasswordForm.vars.valid %}was-validated{% endif %}">
+                        {% include 'core/default_templates/form_main_error.html.twig' %}
+                        {{ form_table.tr(changePasswordForm.password) }}
+                    </div>
+                    <div class="row border-top border-bottom mt-2 pt-2 pb-2">
+                        <div class="col-6"></div>
+                        <div class="col-6 text-end">
+                            {{ form_widget(changePasswordForm.save) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

@@ -1,0 +1,21 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    form_themes: [ 'core/form/fields.html.twig' ]
+    #    exception_controller: null
+    globals:
+        default_language: '%default_language%'
+        lngs: '%languages%'
+        full_languages: '%full_languages%'
+        date_format: "d.m.Y"
+        datetime_format: "d.m.Y H:i:s"
+        upload_web_directory: '%upload_web_directory%'
+        datatable_ipp: '%datatable_ipp%'
+        datatable_ipp_default: '%datatable_ipp_default%'
+        site_name: '%env(SITE_NAME)%'
+        support_ticket_system_link: '%env(SUPPORT_TICKET_SYSTEM_LINK)%'
+
+when@test:
+    twig:
+        strict_variables: true

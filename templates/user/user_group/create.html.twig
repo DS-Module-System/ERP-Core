@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% import 'core/default_templates/form_table_macro.html.twig' as form_table %}
+
+{% set form_btns = form_table.btns('user_group_list', form, true) %}
+
+{% block body %}
+    {{ form_start(form, {
+        'attr': {'novalidate': 'novalidate', 'data-form-save': 'save'}
+    }) }}
+    {# Hidden REAL Symfony checkboxes (index by LABEL) #}
+   {% for child in form.roles %}
+        <input type="checkbox"
+           class="real-role-field d-none"
+           id="{{ child.vars.id }}"
+           name="{{ child.vars.full_name }}"
+           value="{{ child.vars.value }}"
+           {% if child.vars.checked %}checked{% endif %}>
+    {% endfor %}
+
+    {{ form_row(form._token) }}
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <h4 class="header-title">{{ 'user.userGroup.addUserGroupTitle'|dtrans }}</h4>
+            {{ form_btns }}
+
+            {% include 'user/user_group/form_fields.html.twig' with {'form': form} only %}
+
+            <div class="mb-3">
+                <label>
+                    <input type="checkbox" id="check_all_roles" class="me-2"> {{ 'Check All Roles' }}
+                </label>
+            </div>
+
+            <div class="row g-3">
+                {% for group, roles in role_groups %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-header bg-light d-flex align-items-center ">
+                                <span class="fw-bold">{{ group }}</span>
+                                <input type="checkbox" class="check_all_group form-check-input ms-2">
+                            </div>
+                            <div class="card-body">
+                                {% for role_key, role_label in roles %}
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input role-checkbox"
+                                               type="checkbox"
+                                               data-role-key="{{ role_key }}"
+                                               value="{{ role_key }}"
+                                               id="{{ role_key }}">
+                                        <label class="form-check-label" for="{{ role_key }}">
+                                            {{ role_label|dtrans }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="mt-4">
+                {{ form_btns }}
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

@@ -1,0 +1,30 @@
+active: Активен
+changePasswordBtnTitle: 'Смени парола'
+createNewUserTitle: 'Създаване на нов потребител'
+deactive: Неактивен
+editPasswordTitle: 'Смени парола на потребител'
+editUserTitle: 'Редактиране на потребител'
+email: Имейл
+errorEmailFlashMsg: 'Не можете да изтриете потребителя!'
+groups: Групи
+isActive: Активен
+password: Парола
+successChangePasswordFLashMsg: 'Успешно сменихте паролата на потребителя!'
+userGroup: Групи
+userGroup.addUserGroupTitle: 'Създаване на нова група'
+userGroup.editUserGroupTitle: 'Редактиране на група'
+userGroup.errorSameNameFlashMsg: 'Грешка! Има група със същото име!'
+userGroup.name: Име
+userGroup.roles: Роли
+enableTwoFa: 'Two FA ?'
+name: Име
+family: Фамилия
+full.names: Имена
+chooseGroup: 'Изберете група'
+
+layout.userTitle: Потребител
+leftMenu.userGroups: 'Потребителски групи'
+leftMenu.users: Потребители
+
+rememberMe: Запомни ме
+loginBtnTitle: Вход

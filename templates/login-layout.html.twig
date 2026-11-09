@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme=light>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ site_name }} - Login</title>
+    <meta name="robots" content="noindex,nofollow"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="DevScale" name="author">
+
+    <meta name="robots" content="noindex,nofollow"/>
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#4285f4">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#4285f4">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#4285f4">
+    <link rel="apple-touch-icon" sizes="57x57" href="/res_admin/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/res_admin/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/res_admin/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/res_admin/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/res_admin/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/res_admin/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/res_admin/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/res_admin/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/res_admin/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/res_admin/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/res_admin/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/res_admin/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/res_admin/favicons/favicon-16x16.png">
+    <meta name="msapplication-TileImage" content="/res_admin/favicons/ms-icon-144x144.png">
+    <link rel="manifest" href="/res_admin/manifest.json">
+    <meta name="msapplication-TileColor" content="#28208c">
+    <meta name="msapplication-TileImage" content="/res_admin/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#28208c">
+
+    <script>
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', function() {
+				navigator.serviceWorker.register('/admin-service-worker.js');
+			});
+		}
+
+		function getCookie(c_name) {
+			if (document.cookie.length > 0) {
+				c_start = document.cookie.indexOf(c_name + "=");
+				if (c_start != -1) {
+					c_start = c_start + c_name.length + 1;
+					c_end = document.cookie.indexOf(";", c_start);
+					if (c_end == -1) {
+						c_end = document.cookie.length;
+					}
+					return unescape(document.cookie.substring(c_start, c_end));
+				}
+			}
+			return null;
+		}
+
+		var isDarkMode = getCookie('devscale_panel_dark_mode');
+
+		if(isDarkMode === null || isDarkMode == 0) {
+			if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-bs-theme', 'dark')
+			}
+		} else if(isDarkMode == 1) {
+			document.documentElement.setAttribute('data-bs-theme', 'dark')
+        }
+
+    </script>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('scss/app.scss') }}">
+    {% endblock %}
+    {% block javascripts %}{% endblock %}
+
+    {% block importmap %}{{ importmap('app') }}{% endblock %}
+
+    {% block javascript_head %}{% endblock %}
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            /*background-color: #eff3f6;*/
+        }
+
+        .edit-container {
+            /*min-width: 400px;*/
+            width: 100%;
+        }
+
+        @media (min-width: 500px) {
+            .edit-container {
+                min-width: 400px;
+            }
+        }
+
+        .devscale-logo {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .devscale-logo img {
+            width: 100%;
+            max-width: 100px;
+        }
+
+        .edit-container-box-body {
+            padding-top: 7px;
+        }
+    </style>
+</head>
+<body>
+<div class="auth-form-wrap" style="max-width: 460px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="devscale-logo">
+                            <a class="devscale-logo-light" href="https://www.dsmodulesystem.com/" target="_blank"><img
+                                        src="{{ asset('images/ds-module-system-logo-simple.png') }}" alt="devscale-logo"/></a>
+                            <a class="devscale-logo-dark" href="https://www.dsmodulesystem.com/" target="_blank"><img
+                                        src="{{ asset('images/ds-module-system-logo-simple.png') }}" alt="devscale-logo"/></a>
+                        </div>
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="loader" class="loader-wrap"><div class="loader-content"><div class="ds-logo"><img src="/res_admin/favicons/ms-icon-310x310.png"/></div><div class="loader-img"></div></div></div>
+{% block javascript %}
+{{ encore_entry_script_tags('app') }}
+{% endblock %}
+</body>
+</html>

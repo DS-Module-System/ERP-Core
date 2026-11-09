@@ -1,0 +1,13 @@
+scheb_two_factor:
+  trusted_device:
+    enabled: true
+  email:
+    enabled: true
+    digits: 6
+    mailer: App\Mailer\TwoFactorMailer
+    sender_email: '%env(NO_REPLY_MAIL)%'
+    sender_name: No-Reply
+    template: security/2fa_form.html.twig
+  security_tokens:
+    - Symfony\Component\Security\Http\Authenticator\Token\PostAuthenticationToken
+  two_factor_condition: App\Service\Core\TwoFactorCondition

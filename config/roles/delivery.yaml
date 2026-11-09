@@ -1,0 +1,8 @@
+parameters:
+    delivery_roles:
+        # Delivery management roles
+        "ROLE_DELIVERY_VIEW": "roles.role_delivery_view"
+        "ROLE_DELIVERY_CREATE": "roles.role_delivery_create"
+        "ROLE_DELIVERY_EDIT": "roles.role_delivery_edit"
+        "ROLE_DELIVERY_DELETE": "roles.role_delivery_delete"
+        "ROLE_DELIVERY_APPROVE": "roles.role_delivery_approve" 

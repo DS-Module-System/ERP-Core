@@ -1,0 +1,94 @@
+leftMenu:
+  administration: Administration
+  dashboard: Dashboard
+  information: Information
+
+layout:
+  Apr: April
+  Aug: August
+  Dec: December
+  Feb: February
+  Friday: Friday
+  Jan: January
+  Jul: July
+  Jun: June
+  Mar: March
+  May: May
+  Monday: Monday
+  Nov: November
+  Oct: October
+  Saturday: Saturday
+  Sep: September
+  Sunday: Sunday
+  Thursday: Thursday
+  Tuesday: Tuesday
+  Wednesday: Wednesday
+  aboutTitle: 'About Us'
+  chooseTitle: Choose
+  clearBtnTitle: Clear
+  contactBtnTitle: Contacts
+  contactUsTitle: Contact Us
+  deleteBtnTitle: Delete
+  deleteFlashMsg: 'Record deleted successfully!'
+  errorDeleteFlashMsg: 'Cannot delete the record!'
+  deleteConfirmModalTitle: 'Delete confirmation'
+  deleteConfirmModalBody: 'Are you sure you want to delete this record?'
+  cancelBtnTitle: Cancel
+  id: Id
+  languagesTitle: Languages
+  logoutTitle: Logout
+  myAcountTitle: Account
+  navigationTitle: Navigation
+  newFeatureRequesMsg: 'Need improvements in the program? Contact us'
+  noTitle: No
+  saveBtnTitle: Save
+  saveAndContinueBtnTitle: 'Save and Stay'
+  saveAndNewBtnTitle: 'Save and Add New'
+  searchBtnTitle: Search
+  searchBy: Searching by:
+  successCreateFlashMsg: 'Record created successfully!'
+  successEditFlashMsg: 'Record edited successfully!'
+  supportTitle: Support
+  userTitle: User
+  welcome: 'Welcome'
+  yesTitle: Yes
+  permissionsError: 'You dont have permissions! Please contant an administrator.'
+
+module:
+  ItemPerPage: Show
+  actionTitle: Action
+  addRecordBtnTitle: 'New Invoice'
+  addProformaTitle: 'New Proforma'
+  backBtnTitle: Back
+  deleteBtnTitle: Delete
+  editBtnTitle: Edit
+  exportBtnTitle: Export
+  filterActiveTitle: Active
+  filterInactiveTitle: Inactive
+  filterIsTitle: Filter is
+  hasErrorInForm: 'There are errors in the form. Please scroll down to see them.'
+  id: ID
+  paginationAllTitle: All
+  saveBtnTitle: Save
+  searchBtnTitle: Search
+  searchFormTitle: Search
+  actionsTitle: Action
+  delete.row: 'Delete this row'
+  add.row: 'Add row'
+  flow.row: 'Reorder this row'
+  viewBtnTitle: View
+  actions: Actions
+  recordTitle: Records
+
+dscmsInformation:
+  company: Company
+  documentation: Documentation
+  product: Product
+  supportEmail: 'Support Email'
+  web: 'Website'
+
+
+table:
+  confirmation.save: 'Confirmation'
+  confirmation.save.message: 'Are you sure you want to save the changes?'
+  stopBtn: 'Cancel'

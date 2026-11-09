@@ -1,0 +1,7 @@
+parameters:
+    core_roles:
+        # Core system roles
+        "ROLE_SUPER_ADMIN": "roles.role_super_admin"
+        "ROLE_ADMIN": "roles.role_admin"
+        "ROLE_USER": "roles.role_user"
+        "ROLE_ACCOUNT": "roles.role_account"

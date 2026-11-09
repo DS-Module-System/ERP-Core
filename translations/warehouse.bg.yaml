@@ -1,0 +1,26 @@
+# Warehouse controller translations
+leftMenu.warehouses: 'Складове'
+leftMenu.warehouseStocks: 'Наличности'
+
+createWarehouseTitle: 'Създаване на склад'
+editWarehouseTitle: 'Редактиране на склад'
+
+createWarehouseStockTitle: 'Създаване на наличност'
+editWarehouseStockTitle: 'Редактиране на наличност'
+
+name: 'Име'
+address: 'Адрес'
+description: 'Описание'
+warehouse: 'Склад'
+product: 'Продукт'
+quantity: 'Количество'
+measure: 'Мярна единица'
+created_at: 'Създадена в'
+updated_at: 'Обновена в'
+created_by: 'Създадена от'
+quantityFrom: 'Количество от'
+quantityTo: 'Количество до' 
+allWarehouses: 'Всички складове'
+allProducts: 'Всички продукти'
+chooseWarehouse: 'Избери склад'
+chooseProduct: 'Избери продукт'

@@ -1,0 +1,5 @@
+{% if not form.vars.valid %}
+    <div class="invalid-tooltip mt-2 mb-2 font-14 form-main-error" style="display: block;position: initial">
+        <i class="mdi mdi-information-outline me-1"></i> {{ 'core.module.hasErrorInForm'|dtrans }}
+    </div>
+{% endif %}

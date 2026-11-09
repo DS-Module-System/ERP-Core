@@ -1,0 +1,45 @@
+{# Example usage of domain translation extension #}
+<div class="container mt-5">
+    <h1>{{ 'Domain Translation Examples'|dtrans }}</h1>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Using dtrans() function:</h3>
+            <ul>
+                <li><strong>invoice.title:</strong> {{ dtrans('invoice.title') }}</li>
+                <li><strong>invoice.number:</strong> {{ dtrans('invoice.number') }}</li>
+                <li><strong>invoice.statusValues.draft:</strong> {{ dtrans('invoice.statusValues.draft') }}</li>
+                <li><strong>invoice.actions.create:</strong> {{ dtrans('invoice.actions.create') }}</li>
+                <li><strong>client.title:</strong> {{ dtrans('client.title') }}</li>
+                <li><strong>user.title:</strong> {{ dtrans('user.title') }}</li>
+            </ul>
+        </div>
+        
+        <div class="col-md-6">
+            <h3>Using dtrans filter:</h3>
+            <ul>
+                <li><strong>invoice.date:</strong> {{ 'invoice.date'|dtrans }}</li>
+                <li><strong>invoice.amount:</strong> {{ 'invoice.amount'|dtrans }}</li>
+                <li><strong>invoice.statusValues.paid:</strong> {{ 'invoice.statusValues.paid'|dtrans }}</li>
+                <li><strong>invoice.messages.created:</strong> {{ 'invoice.messages.created'|dtrans }}</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3>Domain utilities:</h3>
+            <p><strong>Available domains:</strong> {{ available_domains()|join(', ') }}</p>
+            <p><strong>Invoice domain exists:</strong> {{ domain_exists('invoice') ? 'Yes' : 'No' }}</p>
+            <p><strong>Nonexistent domain exists:</strong> {{ domain_exists('nonexistent') ? 'Yes' : 'No' }}</p>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3>Fallback behavior:</h3>
+            <p><strong>Regular translation key:</strong> {{ dtrans('core.module.addRecordBtnTitle') }}</p>
+            <p><strong>Nonexistent key:</strong> {{ dtrans('invoice.nonexistent.key') }}</p>
+        </div>
+    </div>
+</div> 

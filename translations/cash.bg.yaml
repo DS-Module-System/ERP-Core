@@ -1,0 +1,30 @@
+# Заглавия на страници
+createCashTitle: 'Създаване на касова транзакция'
+editCashTitle: 'Редактиране на касова транзакция'
+
+# Полета
+transactionDate: 'Дата на транзакция'
+amount: 'Сума'
+transactionType: 'Тип транзакция'
+createdBy: 'Създал'
+createdAt: 'Дата на създаване'
+transactionDateFrom: 'Дата от'
+transactionDateTo: 'Дата до'
+amountFrom: 'Сума от'
+amountTo: 'Сума до'
+
+# Enum стойности
+transactionTypeIncome: 'Приход'
+transactionTypeExpense: 'Разход'
+
+# Заглавия на колони
+transaction_date: 'Дата на транзакция'
+transaction_type: 'Тип'
+created_by: 'Създал'
+created_at: 'Дата на създаване'
+
+# Меню
+leftMenu:
+  cash: 'Каса' 
+
+alltypes: 'Всички типове'

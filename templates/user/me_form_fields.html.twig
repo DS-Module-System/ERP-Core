@@ -1,0 +1,9 @@
+{% import 'core/default_templates/form_table_macro.html.twig' as form_table %}
+
+<div class="mt-3 mb-2 {% if not form.vars.valid %}was-validated{% endif %}">
+    {% include 'core/default_templates/form_main_error.html.twig' %}
+    {{ form_table.tr(form.isEnableTwoFa) }}
+    {{ form_table.tr(form.email) }}
+    {{ form_table.tr(form.name) }}
+    {{ form_table.tr(form.family) }}
+</div>

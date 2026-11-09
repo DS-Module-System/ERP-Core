@@ -1,0 +1,46 @@
+# 1) Site routes (публични) - само папката Site
+# site_controllers:
+#   resource:
+#     path: ../../src/Controller/Website/Frontend/
+#     namespace: App\Controller\Website\Frontend
+#   type: attribute
+#   prefix:
+#     bg: ''
+#     en: '/en'
+
+# 2) ImageController - без prefix (за /uploads/...)
+# image_controller:
+#   resource: App\Controller\Core\ImageController
+#   type: attribute
+#   prefix:
+#     bg: ''
+#     en: '/en'
+
+# 3) ERP routes - всичко останало, но изключваме Site и ImageController
+# exclude работи само с glob pattern в resource (не с path/namespace object)
+# erp_controllers:
+#   resource: ../../src/Controller/**/*
+#   type: attribute
+#   exclude:
+#     - ../../src/Controller/Website/Frontend/
+#     - ../../src/Controller/Core/ImageController.php
+#   prefix:
+#     bg: '%erp_prefix%'
+#     en: '/en%erp_prefix%'
+
+controllers:
+    resource:
+        path: ../../src/Controller/
+        namespace: App\Controller
+    type: attribute
+    prefix:
+        bg: ''
+        en: '/en'
+# ako se izpolzwa host trqbva da se promeni CmsLoader ot /en /bg da zarejda razlichnite hostove v new Route
+#    host:
+#        bg: 'test.localhost'
+#        en: 'test-en.localhost'
+
+kernel:
+    resource: App\Kernel
+    type: attribute
